@@ -1,0 +1,45 @@
+<h1 class="text-center m-4">AGRICULTURA BIOLÓGICA XPTO</h1>
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-secondary" style="--bs-bg-opacity: .5;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ path('index') }}">
+        <img src="{{ asset('images/ic_launcher_foreground.png') }}" alt="Logotipo da empresa" width="75px" height="75px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item px-2">
+          <a class="{% if app.request.pathInfo == '/' %}nav-link active{% else %}nav-link{% endif %} fs-3" aria-current="page" href="{{ path('index') }}">Home</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="{% if 'produtos' in app.request.pathInfo %}nav-link active{% else %}nav-link{% endif %} fs-3" href="{{ path('produtos') }}">Produtos</a>
+        </li>
+        <li class="nav-item dropdown px-2">
+          <a class="nav-link dropdown-toggle btn-success fs-3" href="#" id="UsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sobre nós
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="UsMenuLink">
+            <li><a class="dropdown-item" href="../pages/whoarewe.php">Quem somos</a></li>
+            <li><a class="dropdown-item" href="../pages/wherearewe.php">Onde estamos</a></li>
+            <li><a class="dropdown-item" href="../pages/database.php">Base de dados</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown px-2">
+          <a class="nav-link dropdown-toggle fs-3" href="#" id="ClientMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Clientes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="ClientMenuLink">
+            {% if app.user %}
+              <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>            
+            {% else %}
+              <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
+            {% endif %}
+            <li><a class="dropdown-item" href="{{ path('signup') }}">Registo</a></li>
+            <li><a class="dropdown-item" href="#">Carrinho</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

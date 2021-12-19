@@ -1,0 +1,31 @@
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+index:
+    path: /
+    controller: App\Controller\Controller::index
+
+login:
+    path: /login
+    controller: App\Controller\Controller::login
+
+signup:
+    path: /registar
+    controller: App\Controller\Controller::signup
+
+logout:
+    path: /logout
+    methods: GET
+
+produtos:
+    path: /produtos
+    controller: App\Controller\ProdutoController::index
+
+criar_produto:
+    path: /produto
+    controller: App\Controller\ProdutoController::criar_produto

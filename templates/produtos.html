@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block titulo %}
+XPTO | Produtos
+{% endblock %}
+{% block conteudo %}
+<div class="row">
+    {% for produto in produtos %}
+    <div class="col-sm-4">
+        <div class="card m-1 p-1" style="width: 18rem;">
+            <img src="{{ produto.foto }}" class="card-img-top img-thumbnail rounded" alt="Foto de {{ produto.nome }}">
+            <div class="card-body">
+            <h5 class="card-title">{{ produto.nome }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
+            <p class="card-text">{{ produto.descricao }}</p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

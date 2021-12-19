@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('images/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    {% block estilos %}{% endblock %}
+    {% block scripts %}{% endblock %}
+    <title>{% block titulo %}{% endblock %}</title>
+</head>
+<body>
+    {{ include('header_nav.html') }}
+    {{ include('messages.html') }}
+    <main>
+        {% block conteudo %}{% endblock %}
+    </main>
+    {{ include('footer.html') }}
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/messages.js"></script>
+</body>
+</html>
