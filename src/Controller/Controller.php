@@ -24,16 +24,6 @@ class Controller extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        $utilizador = $em->getRepository(User::class)->find($user);
-        if($utilizador)
-        {
-            if($utilizador->getId() == 1)
-            {
-                $utilizador->setRoles(['ROLE_ADMIN']);
-                $em->persist($utilizador);
-                $em->flush();
-            }
-        }
         return $this->render('index.html', ['url' => $_SERVER['REQUEST_URI']]);
     }
 
@@ -92,6 +82,7 @@ class Controller extends AbstractController
             }
             // Encripto/hash a password
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+            $user->setRoles(['ROLE_ADMIN']);
             // Gravo o utilizador na base de dados
             $em->persist($user);
             $em->flush();

@@ -355,11 +355,11 @@
     <service id="App\Form\SignupForm" class="App\Form\SignupForm" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
-    <service id="App\Repository\CarrinhoRepository" class="App\Repository\CarrinhoRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\CarrinhoProdutoRepository" class="App\Repository\CarrinhoProdutoRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
-    <service id="App\Repository\LinhasCarrinhoRepository" class="App\Repository\LinhasCarrinhoRepository" autowire="true" autoconfigure="true">
+    <service id="App\Repository\CarrinhoRepository" class="App\Repository\CarrinhoRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -4439,7 +4439,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.W.pWK0Z"/>
+      <argument type="service" id=".service_locator.K_yUUee"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5573,10 +5573,10 @@
     <service id=".abstract.instanceof.App\Controller\ProdutoController" class="App\Controller\ProdutoController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\SignupForm" class="App\Form\SignupForm" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\SignupForm" class="App\Form\SignupForm" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CarrinhoProdutoRepository" class="App\Repository\CarrinhoProdutoRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\CarrinhoProdutoRepository" class="App\Repository\CarrinhoProdutoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CarrinhoRepository" class="App\Repository\CarrinhoRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\CarrinhoRepository" class="App\Repository\CarrinhoRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\LinhasCarrinhoRepository" class="App\Repository\LinhasCarrinhoRepository" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Repository\LinhasCarrinhoRepository" class="App\Repository\LinhasCarrinhoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ProdutoRepository" class="App\Repository\ProdutoRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ProdutoRepository" class="App\Repository\ProdutoRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UnidadeRepository" class="App\Repository\UnidadeRepository" autowire="true" abstract="true"/>
@@ -6202,11 +6202,11 @@
       <argument type="service" id="cache.doctrine.orm.default.result"/>
       <factory class="Doctrine\Common\Cache\Psr6\DoctrineProvider" method="wrap"/>
     </service>
-    <service id=".service_locator.W.pWK0Z" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.K_yUUee" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\CarrinhoProdutoRepository" type="service_closure" id="App\Repository\CarrinhoProdutoRepository"/>
         <argument key="App\Repository\CarrinhoRepository" type="service_closure" id="App\Repository\CarrinhoRepository"/>
-        <argument key="App\Repository\LinhasCarrinhoRepository" type="service_closure" id="App\Repository\LinhasCarrinhoRepository"/>
         <argument key="App\Repository\ProdutoRepository" type="service_closure" id="App\Repository\ProdutoRepository"/>
         <argument key="App\Repository\UnidadeRepository" type="service_closure" id="App\Repository\UnidadeRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
