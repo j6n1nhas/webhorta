@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+{% block scripts %}
+<script src="{{ asset('js/register.js') }}"></script>
+{% endblock %}
+{% block titulo %}
+XPTO | Registo
+{% endblock %}
+{% block conteudo %}
+    <h2 class="text-center fs-1 m-4">Registo de cliente</h2>
+    <div class="container-fluid formulario mt-5 p-5">
+        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+        <div class="row">
+            <div class="col-sm-6 col-lg-5 p-3">
+                {{ form_label(form.nome_proprio) }}
+                {{ form_widget(form.nome_proprio) }}
+                <div class="invalid-feedback">
+                    Introduza um nome válido
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.nome_proprio) }}
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-5 p-3">
+                {{ form_label(form.nome_apelido) }}
+                {{ form_widget(form.nome_apelido) }}
+                <div class="invalid-feedback">
+                    Introduza um apelido válido
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.nome_apelido) }}
+                </div>
+            </div>
+            <div class="col-sm-3 col-lg-2 p-3">
+                {{ form_label(form.cod_postal) }}
+                {{ form_widget(form.cod_postal, {'attr': {'pattern': "\\d{4}-\\d{3}", 'maxlength': 8, 'size': 8}}) }}
+                <div class="invalid-feedback">
+                    Código postal no formato 0000-000
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.cod_postal) }}
+                </div>
+            </div>    
+            <div class="col-sm-9 col-lg-5 p-3">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+                {{ form_help(form.email) }}
+                <div class="invalid-feedback">
+                    Introduza um endereço válido
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.email) }}
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-7 p-3">
+                {{ form_label(form.morada) }}
+                {{ form_widget(form.morada) }}
+                <div class="form-error">
+                    {{ form_errors(form.morada) }}
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 p-3">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password, {'attr': {'minlength': 6}}) }}
+                <div class="invalid-feedback">
+                    Necessário com mínimo 6 carateres
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.password) }}
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-6 p-3">
+                {{ form_label(form.password2) }}
+                {{ form_widget(form.password2, {'attr': {'minlength': 6}}) }}
+                <div class="invalid-feedback">
+                    Tem de ser igual à password
+                </div>
+                <div class="form-error">
+                    {{ form_errors(form.password2) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-lg-6 p-3">
+                <input type="submit" name="btn_submit" id="btn_submit" class="btn btn-outline-success p-2" value="Registar">
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

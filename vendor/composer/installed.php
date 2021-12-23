@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'fa401b5a7b25bf2414a4f504679092a9cdc55310',
+        'reference' => '23306c11d07323d0f2efe3526d401b88e798fb54',
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'fa401b5a7b25bf2414a4f504679092a9cdc55310',
+            'reference' => '23306c11d07323d0f2efe3526d401b88e798fb54',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(
@@ -191,12 +191,12 @@
             'dev_requirement' => false,
         ),
         'laminas/laminas-code' => array(
-            'pretty_version' => '4.5.0',
-            'version' => '4.5.0.0',
+            'pretty_version' => '4.5.1',
+            'version' => '4.5.1.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laminas/laminas-code',
             'aliases' => array(),
-            'reference' => 'c99ef8e5629c33bfaa3a8f1df773e916af564cd6',
+            'reference' => '6fd96d4d913571a2cd056a27b123fa28cb90ac4e',
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(

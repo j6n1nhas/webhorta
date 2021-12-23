@@ -9,6 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+# Para a validação de campos
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\LengthValidator;
+use Symfony\Component\Validator\Constraints\Regex;
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
@@ -65,6 +74,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->carrinhos = new ArrayCollection();
+    }
+
+    /**
+     * Constraints validation
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata): void
+    {
+        $metadata->addPropertyConstraint('nome_proprio', new NotBlank());
+        $metadata->addPropertyConstraint('password', new NotBlank());
+        $metadata->addPropertyConstraint('password', new Length(min: 6));
+        $metadata->addPropertyConstraint('cod_postal', new Length(exactly: 8));
+        $metadata->addPropertyConstraint('cod_postal', new Regex('/\d{4}-\d{3}/', message: 'XXXX-XXX'));
+        $metadata->addPropertyConstraint('email', new Email(['message' => '{{ value }} não é um endereço válido']));
     }
 
     public function getId(): ?int

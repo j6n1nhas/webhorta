@@ -1,1 +1,10 @@
-<div id="alertPlaceholder"></div>
+<div id="alertPlaceholder mt-2">
+    {% if app.user %}
+    Olá {{ app.user.nomeProprio }} {{ app.user.nomeApelido }}
+    {% endif %}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+</div>

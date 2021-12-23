@@ -36,7 +36,9 @@
               <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
             {% endif %}
             <li><a class="dropdown-item" href="{{ path('signup') }}">Registo</a></li>
+            {% if app.user %}
             <li><a class="dropdown-item" href="#">Carrinho</a></li>
+            {% endif %}
           </ul>
         </li>
       </ul>

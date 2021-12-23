@@ -17,6 +17,10 @@ framework:
     php_errors:
         log: true
 
+    #Utilizar as mensagens da classe Form
+    form:
+        legacy_error_messages: false
+
 when@test:
     framework:
         test: true

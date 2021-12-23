@@ -37,6 +37,10 @@ class Carrinho
 
     /**
      * @ORM\ManyToMany(targetEntity=Produto::class, inversedBy="carrinhos")
+     * @JoinTable(name="carrinho_produto",
+     *      joinColumns={@JoinColumn(name="produto_id", referecedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="carrinho_id", referencedColunmName="id")}
+     * )
      */
     private $produtos;
 
@@ -58,7 +62,6 @@ class Carrinho
     public function setDataCompra(\DateTimeInterface $data_compra): self
     {
         $this->data_compra = $data_compra;
-
         return $this;
     }
 
@@ -70,7 +73,6 @@ class Carrinho
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
         return $this;
     }
 
@@ -79,10 +81,19 @@ class Carrinho
         return $this->valor_total;
     }
 
+    /*
     public function setValorTotal(float $valor_total): self
     {
         $this->valor_total = $valor_total;
-
+        return $this;
+    }
+    */
+    public function setValorTotal(): self
+    {
+        $vt = 0.0;
+        foreach($this->getProdutos() as $produto)
+            $vt += $produto->getPrecoUnitario();
+        $this->valor_total = $vt;
         return $this;
     }
 
@@ -96,17 +107,14 @@ class Carrinho
 
     public function addProduto(Produto $produto): self
     {
-        if (!$this->produtos->contains($produto)) {
+        if (!$this->produtos->contains($produto))
             $this->produtos[] = $produto;
-        }
-
         return $this;
     }
 
     public function removeProduto(Produto $produto): self
     {
         $this->produtos->removeElement($produto);
-
         return $this;
     }
 }

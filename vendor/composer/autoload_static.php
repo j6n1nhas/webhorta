@@ -562,11 +562,20 @@ class ComposerStaticInit2fe16df5d8074fb48a331abf4381da3b
     );
 
     public static $classMap = array (
+        'App\\Controller\\Controller' => __DIR__ . '/../..' . '/src/Controller/Controller.php',
+        'App\\Controller\\ProdutoController' => __DIR__ . '/../..' . '/src/Controller/ProdutoController.php',
+        'App\\Entity\\Carrinho' => __DIR__ . '/../..' . '/src/Entity/Carrinho.php',
+        'App\\Entity\\LinhasCarrinho' => __DIR__ . '/../..' . '/src/Entity/LinhasCarrinho.php',
         'App\\Entity\\Produto' => __DIR__ . '/../..' . '/src/Entity/Produto.php',
         'App\\Entity\\Unidade' => __DIR__ . '/../..' . '/src/Entity/Unidade.php',
+        'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
+        'App\\Form\\SignupForm' => __DIR__ . '/../..' . '/src/Form/SignupForm.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Repository\\CarrinhoRepository' => __DIR__ . '/../..' . '/src/Repository/CarrinhoRepository.php',
+        'App\\Repository\\LinhasCarrinhoRepository' => __DIR__ . '/../..' . '/src/Repository/LinhasCarrinhoRepository.php',
         'App\\Repository\\ProdutoRepository' => __DIR__ . '/../..' . '/src/Repository/ProdutoRepository.php',
         'App\\Repository\\UnidadeRepository' => __DIR__ . '/../..' . '/src/Repository/UnidadeRepository.php',
+        'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
         'Collator' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Attribute\\AsEntityListener' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Attribute/AsEntityListener.php',

@@ -89,7 +89,6 @@ class __TwigTemplate_15dedf6f000afd88486e3600543d0ff4659224832d801f5b253751dac23
         echo twig_include($this->env, $context, "footer.html");
         echo "
     <script src=\"../js/bootstrap.bundle.js\"></script>
-    <script src=\"../js/messages.js\"></script>
 </body>
 </html>";
         
@@ -184,7 +183,7 @@ class __TwigTemplate_15dedf6f000afd88486e3600543d0ff4659224832d801f5b253751dac23
 
     public function getDebugInfo()
     {
-        return array (  158 => 17,  140 => 11,  122 => 10,  104 => 9,  89 => 19,  86 => 18,  84 => 17,  79 => 15,  75 => 14,  68 => 11,  65 => 10,  63 => 9,  59 => 8,  55 => 7,  47 => 1,);
+        return array (  157 => 17,  139 => 11,  121 => 10,  103 => 9,  89 => 19,  86 => 18,  84 => 17,  79 => 15,  75 => 14,  68 => 11,  65 => 10,  63 => 9,  59 => 8,  55 => 7,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -209,7 +208,6 @@ class __TwigTemplate_15dedf6f000afd88486e3600543d0ff4659224832d801f5b253751dac23
     </main>
     {{ include('footer.html') }}
     <script src=\"../js/bootstrap.bundle.js\"></script>
-    <script src=\"../js/messages.js\"></script>
 </body>
 </html>", "base.html", "/home/johnny/Documents/Cursos/ISLA/ANO 2/SEMESTRE 3/Programação para a Web/Projeto/Project_root/my_project/templates/base.html");
     }

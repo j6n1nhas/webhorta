@@ -140,11 +140,11 @@ class __TwigTemplate_28499ca09b47ca46b1087dc907fe524ea6e8b9a9157774074899d2ba29d
     <form action=\"";
         // line 14
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("signup");
-        echo "\" name=\"form_register\" method=\"POST\" class=\"needs-validation simple-validation-alert\" autocomplete=\"off\" novalidate>
+        echo "\" name=\"form_register\" method=\"POST\" class=\"needs-validation simple-validation-alert\" autocomplete=\"off\">
         <div class=\"row\">
             <div class=\"col-sm-4 col-lg-6 p-3\">
                 <label for=\"nome_proprio\" class=\"form-label\">Nome próprio</label>
-                <input type=\"text\" name=\"nome_proprio\" id=\"nome_proprio\" class=\"form-control\" placeholder=\"Insira o seu nome próprio...\" required>
+                <input type=\"text\" name=\"nome_proprio\" id=\"nome_proprio\" class=\"form-control\" placeholder=\"Insira o seu nome próprio...\">
                 <div class=\"invalid-feedback\">
                     Introduza um nome válido
                 </div>
@@ -194,11 +194,11 @@ class __TwigTemplate_28499ca09b47ca46b1087dc907fe524ea6e8b9a9157774074899d2ba29d
     </form>
     ";
         // line 66
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), 'form');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 66, $this->source); })()), 'form_start');
         echo "
     ";
         // line 67
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 67, $this->source); })()), 'form_start');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 67, $this->source); })()), 'widget');
         echo "
     ";
         // line 68
@@ -244,11 +244,11 @@ XPTO | Registo
 {% block conteudo %}
 <h2 class=\"text-center mt-3 mb-1\">Registo de cliente</h2>
 <div class=\"container-fluid formulario mt-5\">
-    <form action=\"{{ path('signup') }}\" name=\"form_register\" method=\"POST\" class=\"needs-validation simple-validation-alert\" autocomplete=\"off\" novalidate>
+    <form action=\"{{ path('signup') }}\" name=\"form_register\" method=\"POST\" class=\"needs-validation simple-validation-alert\" autocomplete=\"off\">
         <div class=\"row\">
             <div class=\"col-sm-4 col-lg-6 p-3\">
                 <label for=\"nome_proprio\" class=\"form-label\">Nome próprio</label>
-                <input type=\"text\" name=\"nome_proprio\" id=\"nome_proprio\" class=\"form-control\" placeholder=\"Insira o seu nome próprio...\" required>
+                <input type=\"text\" name=\"nome_proprio\" id=\"nome_proprio\" class=\"form-control\" placeholder=\"Insira o seu nome próprio...\">
                 <div class=\"invalid-feedback\">
                     Introduza um nome válido
                 </div>
@@ -296,8 +296,8 @@ XPTO | Registo
             </div>
         </div>
     </form>
-    {{ form(form) }}
     {{ form_start(form) }}
+    {{ form_widget(form) }}
     {{ form_end(form) }}
 </div>
 {% endblock %}", "register.html", "/home/johnny/Documents/Cursos/ISLA/ANO 2/SEMESTRE 3/Programação para a Web/Projeto/Project_root/my_project/templates/register.html");

@@ -6,11 +6,20 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\Controller' => $baseDir . '/src/Controller/Controller.php',
+    'App\\Controller\\ProdutoController' => $baseDir . '/src/Controller/ProdutoController.php',
+    'App\\Entity\\Carrinho' => $baseDir . '/src/Entity/Carrinho.php',
+    'App\\Entity\\LinhasCarrinho' => $baseDir . '/src/Entity/LinhasCarrinho.php',
     'App\\Entity\\Produto' => $baseDir . '/src/Entity/Produto.php',
     'App\\Entity\\Unidade' => $baseDir . '/src/Entity/Unidade.php',
+    'App\\Entity\\User' => $baseDir . '/src/Entity/User.php',
+    'App\\Form\\SignupForm' => $baseDir . '/src/Form/SignupForm.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Repository\\CarrinhoRepository' => $baseDir . '/src/Repository/CarrinhoRepository.php',
+    'App\\Repository\\LinhasCarrinhoRepository' => $baseDir . '/src/Repository/LinhasCarrinhoRepository.php',
     'App\\Repository\\ProdutoRepository' => $baseDir . '/src/Repository/ProdutoRepository.php',
     'App\\Repository\\UnidadeRepository' => $baseDir . '/src/Repository/UnidadeRepository.php',
+    'App\\Repository\\UserRepository' => $baseDir . '/src/Repository/UserRepository.php',
     'Collator' => $vendorDir . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Doctrine\\Bundle\\DoctrineBundle\\Attribute\\AsEntityListener' => $vendorDir . '/doctrine/doctrine-bundle/Attribute/AsEntityListener.php',

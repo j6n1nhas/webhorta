@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block estilos %}
-<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
 {% endblock %}
 {% block scripts %}
 <script src="{{ asset('js/login.js') }}"></script>
@@ -10,13 +10,13 @@ XPTO | Login
 {% endblock %}
 {% block conteudo %}
 <h2 class="text-center fs-1 m-4">Formulário de Login</h2>
-<section class="container-sm formulario">
+<section class="container-fluid formulario mt-5 p-5">
     <form action="{{ path('login') }}" method="POST" novalidate>
         <label for="email" class="form-label">Email</label>
-        <input type="email" name="_username" id="email" class="form-control mb-3" required>
+        <input type="email" name="_username" id="email" class="form-control mb-3" value="{{ last_username }}" required>
         <label for="password" class="form-label">Password</label>
         <input type="password" name="_password" id="password" class="form-control mb-3" required>
-        <input type="hidden" name="_target_path" value="/produtos"/>
+        <input type="hidden" name="_target_path" value="{{ path('produtos') }}"/>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <input type="submit" class="btn btn-outline-success" value="Login">
     </form>

@@ -73,7 +73,6 @@ class Produto
     public function setNome(string $nome): self
     {
         $this->nome = $nome;
-
         return $this;
     }
 
@@ -85,7 +84,6 @@ class Produto
     public function setDescricao(?string $descricao): self
     {
         $this->descricao = $descricao;
-
         return $this;
     }
 
@@ -97,7 +95,6 @@ class Produto
     public function setPrecoUnitario(float $preco_unitario): self
     {
         $this->preco_unitario = $preco_unitario;
-
         return $this;
     }
 
@@ -109,7 +106,6 @@ class Produto
     public function setStock(float $stock): self
     {
         $this->stock = $stock;
-
         return $this;
     }
 
@@ -121,7 +117,6 @@ class Produto
     public function setFoto(?string $foto): self
     {
         $this->foto = $foto;
-
         return $this;
     }
 
@@ -133,7 +128,6 @@ class Produto
     public function setUnidade(?Unidade $unidade): self
     {
         $this->unidade = $unidade;
-
         return $this;
     }
 
@@ -151,7 +145,6 @@ class Produto
             $this->carrinhos[] = $carrinho;
             $carrinho->addProduto($this);
         }
-
         return $this;
     }
 
@@ -160,7 +153,6 @@ class Produto
         if ($this->carrinhos->removeElement($carrinho)) {
             $carrinho->removeProduto($this);
         }
-
         return $this;
     }
 }
