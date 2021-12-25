@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block estilos %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+{% block conteudo %}
+{% if is_granted('ROLE_ADMIN') %}
+    És admin, não estás aqui a fazer nada!
+    {% else %}
+        És user
+{% endif %}
+{% if carrinho is defined %}
+    Este é o carrinho:<br>
+    {% for chave, valor in carrinho %}
+        {{ chave }}: {{ valor }}<br/>
+        {% for produto in valor %}
+            {{ produto }}: {{ valor }}
+        {% endfor %}
+    {% endfor %}
+    {{ dump(carrinho) }}
+{% endif %}
+{% if objetos is defined %}
+    O objeto está definido:<br/>
+    {{ dump(objetos) }}
+{% endif %}
+{% endblock %}

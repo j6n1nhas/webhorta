@@ -150,7 +150,11 @@ class __TwigTemplate_c9535ffd79ae5b8e77cf90a3d3c701cc8ea347e263214b2598aedacc050
         <input type=\"password\" name=\"_password\" id=\"password\" class=\"form-control mb-3\" required>
         <input type=\"hidden\" name=\"_target_path\" value=\"";
         // line 19
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("produtos");
+        if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_index");
+        } else {
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("produtos");
+        }
         echo "\"/>
         <input type=\"hidden\" name=\"_csrf_token\" value=\"";
         // line 20
@@ -180,7 +184,7 @@ class __TwigTemplate_c9535ffd79ae5b8e77cf90a3d3c701cc8ea347e263214b2598aedacc050
 
     public function getDebugInfo()
     {
-        return array (  157 => 20,  153 => 19,  147 => 16,  142 => 14,  138 => 12,  128 => 11,  117 => 9,  107 => 8,  94 => 6,  84 => 5,  71 => 3,  61 => 2,  38 => 1,);
+        return array (  161 => 20,  153 => 19,  147 => 16,  142 => 14,  138 => 12,  128 => 11,  117 => 9,  107 => 8,  94 => 6,  84 => 5,  71 => 3,  61 => 2,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -203,7 +207,7 @@ XPTO | Login
         <input type=\"email\" name=\"_username\" id=\"email\" class=\"form-control mb-3\" value=\"{{ last_username }}\" required>
         <label for=\"password\" class=\"form-label\">Password</label>
         <input type=\"password\" name=\"_password\" id=\"password\" class=\"form-control mb-3\" required>
-        <input type=\"hidden\" name=\"_target_path\" value=\"{{ path('produtos') }}\"/>
+        <input type=\"hidden\" name=\"_target_path\" value=\"{% if is_granted('ROLE_ADMIN') %}{{ path('admin_index') }}{% else %}{{ path('produtos') }}{% endif %}\"/>
         <input type=\"hidden\" name=\"_csrf_token\" value=\"{{ csrf_token('authenticate') }}\">
         <input type=\"submit\" class=\"btn btn-outline-success\" value=\"Login\">
     </form>

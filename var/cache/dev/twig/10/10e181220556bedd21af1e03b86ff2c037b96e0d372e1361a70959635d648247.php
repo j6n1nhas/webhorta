@@ -119,7 +119,9 @@ class __TwigTemplate_30f675ae99a32238812d216de7efb0b15e3ef24e781b31dc20a78e3ff34
         // line 39
         if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 39, $this->source); })()), "user", [], "any", false, false, false, 39)) {
             // line 40
-            echo "            <li><a class=\"dropdown-item\" href=\"#\">Carrinho</a></li>
+            echo "            <li><a class=\"dropdown-item\" href=\"";
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("carrinho");
+            echo "\">Carrinho</a></li>
             ";
         }
         // line 42
@@ -149,7 +151,7 @@ class __TwigTemplate_30f675ae99a32238812d216de7efb0b15e3ef24e781b31dc20a78e3ff34
 
     public function getDebugInfo()
     {
-        return array (  126 => 42,  122 => 40,  120 => 39,  115 => 38,  109 => 36,  103 => 34,  101 => 33,  75 => 16,  63 => 13,  52 => 5,  48 => 4,  43 => 1,);
+        return array (  128 => 42,  122 => 40,  120 => 39,  115 => 38,  109 => 36,  103 => 34,  101 => 33,  75 => 16,  63 => 13,  52 => 5,  48 => 4,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -193,7 +195,7 @@ class __TwigTemplate_30f675ae99a32238812d216de7efb0b15e3ef24e781b31dc20a78e3ff34
             {% endif %}
             <li><a class=\"dropdown-item\" href=\"{{ path('signup') }}\">Registo</a></li>
             {% if app.user %}
-            <li><a class=\"dropdown-item\" href=\"#\">Carrinho</a></li>
+            <li><a class=\"dropdown-item\" href=\"{{ path('carrinho') }}\">Carrinho</a></li>
             {% endif %}
           </ul>
         </li>

@@ -16,7 +16,7 @@ XPTO | Login
         <input type="email" name="_username" id="email" class="form-control mb-3" value="{{ last_username }}" required>
         <label for="password" class="form-label">Password</label>
         <input type="password" name="_password" id="password" class="form-control mb-3" required>
-        <input type="hidden" name="_target_path" value="{{ path('produtos') }}"/>
+        <input type="hidden" name="_target_path" value="{% if is_granted('ROLE_ADMIN') %}{{ path('admin_index') }}{% else %}{{ path('produtos') }}{% endif %}"/>
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <input type="submit" class="btn btn-outline-success" value="Login">
     </form>

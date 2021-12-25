@@ -3,16 +3,17 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Entity\User;
+use App\Entity\Produto;
+
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,19 +22,25 @@ use App\Form\SignupForm;
 class Controller extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(EntityManagerInterface $em): Response
+    public function index(): Response
     {
-        $user = $this->getUser();
         return $this->render('index.html', ['url' => $_SERVER['REQUEST_URI']]);
     }
 
+    // Função para tratar do login no site
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        // Obtenho algum erro de autenticação que tenha ocorrido
         $error = $authenticationUtils->getLastAuthenticationError();
+        // Se tiver ocorrido algum erro de autenticação adiciono uma mensagem de informação ao utilizador
         if($error)
             $this->addFlash('danger', $error->getMessageKey());
+        // Obtenho o último user com que o utilizador se autenticou para pré preencher o formulário
         $lastUsername = $authenticationUtils->getLastUsername();
+        if($this->isGranted('ROLE_ADMIN'))
+            return $this->redirect('admin_index');
+        // Renderizo o documento login.html passando o último utilizador que se autenticou para pré preencher o formulário
         return $this->render('login.html', [
             'last_username' => $lastUsername,
         ]);
@@ -82,7 +89,7 @@ class Controller extends AbstractController
             }
             // Encripto/hash a password
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
-            $user->setRoles(['ROLE_ADMIN']);
+            $user->setRoles(['ROLE_USER']);
             // Gravo o utilizador na base de dados
             $em->persist($user);
             $em->flush();
@@ -93,6 +100,97 @@ class Controller extends AbstractController
         }
         // Se o request for um GET, é renderizado o ficheiro signup.html, passando o formulário para renderizar
         return $this->renderForm('signup.html', ['form' => $form]);
+    }
+
+    // Função para renderizar o carrinho
+    #[Route('/carrinho', name: 'carrinho', methods: 'GET')]
+    public function carrinho(Request $request, Session $session)
+    {
+        // Verifico se existe um carrinho na sessão
+        if($session->has('carrinho'))
+        {
+            $carrinho = $session->get('carrinho');
+            return $this->render('carrinho.html', ['carrinho' => $carrinho]);
+        }
+        // Se não houver carrinho criado em sessão, crio uma mensagem para o utilizador que será renderizada através do ficheiro messages.html
+        $this->addFlash('warning', "Não existe nenhum carrinho ativo!");
+        // Redireciono o utilizador para os produtos
+        return $this->redirectToRoute('produtos');
+    }
+
+    // Função para adicionar um produto ao carrinho
+    #[Route('/carrinho/add/{id}', name: 'add_carrinho', methods: ['POST', 'GET'])]
+    public function add_carrinho(Session $session, Produto $produto, EntityManagerInterface $em)
+    {
+        $session->remove('carrinho');
+        // Obtenho o produto a adicionar da base de dados
+        $p = $em->getRepository(Produto::class)->find($produto);
+        // Se a sessão não tiver ainda um carrinho guardado/criado
+        if(!$session->has('carrinho'))
+        {
+            // Crio a estrutura de um carrinho novo e incluo logo o produto em questão
+            $carrinho = array(
+                'data_compra' => date('Y/m/d'),
+                'valor_total' => $p->getPrecoUnitario(),
+                'user_id' => $this->getUser()->getId(),
+                $p->getNome() => array(
+                    'quantidade' => 1,
+                    'preco_unitario' => $p->getPrecoUnitario(),
+                    'unidade' => $p->getUnidade()->getNome(),
+                ),
+            );
+            // Crio o carrinho na sessão
+            $session->set('carrinho', $carrinho);
+            //dd($session);
+            // Crio uma mensagem de sucesso para o utilizador que será renderizada através do ficheiro mesages.html
+            $this->addFlash('success', "Adicionado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." ao seu carrinho");
+            // Redireciono o utilizador para a página de produtos
+            return $this->redirectToRoute('carrinho');
+        }
+        // Se já houver um carrinho criado na sessão
+        else
+        {
+            // Obtenho-o
+            $carrinho = $session->get('carrinho');
+            // Verifico se o produto a adicionar já existe no carrinho
+            if(array_key_exists($p->getNome(), $carrinho))
+            {
+                // Incremento a quantidade
+                $carrinho[$p->getNome()]['quantidade'] += 1;
+                // Atualizo o valor total da encomenda
+                $carrinho['valor_total'] += $p->getPrecoUnitario();
+            }
+            // Se o carrinho ainda não tiver este produto
+            else
+            {
+                // Crio a estrutura do produto que quero que o carrinho tenha
+                $array_produto = array(
+                    $p->getNome() => [
+                        'quantidade' => 1,
+                        'preco_unit' => $p->getPrecoUnitario(),
+                        'unidade' => $p->getUnidade()->getNome(),
+                    ],
+                );
+                // Uno o produto ao carrinho
+                array_merge($carrinho, $array_produto);
+            }
+        }
+        // Defino o carrinho na sessão
+        $session->set('carrinho', $carrinho);
+        // Crio uma mensagem de sucesso para o utilizador que será renderizada através do ficheiro messages.html
+        $this->addFlash('success', "Adicionado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." ao seu carrinho");
+        // Gravo a sessão
+        $session->save();
+        dd($session, $carrinho);
+        // Redireciono o utilizador para a página de produtos
+        return $this->redirectToRoute('carrinho');
+    }
+
+    // Função para remover um produto do carrinho
+    #[Route('/carrinho/remove', name: 'remove_carrinho', methods: ['POST'])]
+    public function remove_carrinho(Produto $produto)
+    {
+        return $this->render('carrinho.html', ['mensagem' => 'Este é para remover do carrinho']);
     }
 }
 

@@ -16,7 +16,9 @@ class ProdutoController extends AbstractController
     #[Route('/produtos', name: 'produtos')]
     public function index(ManagerRegistry $doctrine): Response
     {
+        // Obtenho todos os produtos da base de dados
         $produtos = $doctrine->getRepository(Produto::class)->findAll();
+        // Renderizo o documento produtos.html passando os produtos obtidos na variável $produtos
         return $this->render('produtos.html', [
             'produtos' => $produtos,
             'url' => $_SERVER['REQUEST_URI'],

@@ -40,7 +40,7 @@ class __TwigTemplate_32b6114e89eff2e57cc646f1968dd40a1a6fafb4388be7d2404ff186baf
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "messages.html"));
 
         // line 1
-        echo "<div id=\"alertPlaceholder mt-2\">
+        echo "<div id=\"alertPlaceholder m-2\">
     ";
         // line 2
         if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 2, $this->source); })()), "user", [], "any", false, false, false, 2)) {
@@ -65,7 +65,7 @@ class __TwigTemplate_32b6114e89eff2e57cc646f1968dd40a1a6fafb4388be7d2404ff186baf
                 // line 7
                 echo "            <div class=\"alert alert-";
                 echo twig_escape_filter($this->env, $context["type"], "html", null, true);
-                echo "\">";
+                echo " m-2\">";
                 echo twig_escape_filter($this->env, $context["message"], "html", null, true);
                 echo "</div>
         ";
@@ -106,13 +106,13 @@ class __TwigTemplate_32b6114e89eff2e57cc646f1968dd40a1a6fafb4388be7d2404ff186baf
 
     public function getSourceContext()
     {
-        return new Source("<div id=\"alertPlaceholder mt-2\">
+        return new Source("<div id=\"alertPlaceholder m-2\">
     {% if app.user %}
     Olá {{ app.user.nomeProprio }} {{ app.user.nomeApelido }}
     {% endif %}
     {% for type, messages in app.flashes %}
         {% for message in messages %}
-            <div class=\"alert alert-{{ type }}\">{{ message }}</div>
+            <div class=\"alert alert-{{ type }} m-2\">{{ message }}</div>
         {% endfor %}
     {% endfor %}
 </div>", "messages.html", "/home/johnny/Documents/Cursos/ISLA/ANO 2/SEMESTRE 3/Programação para a Web/Projeto/Project_root/my_project/templates/messages.html");

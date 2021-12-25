@@ -29,3 +29,19 @@ produtos:
 criar_produto:
     path: /produto
     controller: App\Controller\ProdutoController::criar_produto
+
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::admin_index
+
+carrinho:
+    path: /carrinho
+    controller: App\Controller\Controller::carrinho
+
+add_carrinho:
+    path: /carrinho/add/{id}
+    controller: App\Controller\Controller::add_carrinho
+
+remove_carrinho:
+    path: /carrinho/remove/{id}
+    controller: App\Controller\Controller::remove_carrinho

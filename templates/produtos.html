@@ -2,22 +2,28 @@
 {% block titulo %}
 XPTO | Produtos
 {% endblock %}
+{% block estilos %}
+<link rel="stylesheet" type="text/css" href="{{ asset('css/produtos.css') }}">
+{% endblock %}
 {% block scripts %}
 {% endblock %}
 {% block conteudo %}
 <div class="row">
     {% for produto in produtos %}
-    <div class="col-sm-4">
-        <div class="card m-1 p-1" style="width: 18rem;">
-            <img src="{{ produto.foto }}" class="card-img-top img-thumbnail rounded" alt="Foto de {{ produto.nome }}">
+        <div class="card m-3 p-3 col-lg-3 col-sm-6 col-md-5">
             <div class="card-body">
-            <h5 class="card-title">{{ produto.nome }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
-            <p class="card-text">{{ produto.descricao }}</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
+                <img src="{{ produto.foto }}" class="card-img-top img-thumbnail rounded" alt="Foto de {{ produto.nome }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
+                    <p class="card-text">{{ produto.descricao }}</p>
+                </div>
+                <div class="card-footer row">
+                    <a href="{{ path('add_carrinho', {'id': produto.id}) }}" class="btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1">Adicionar ao carrinho</a>
+                    <a href="{{ path('remove_carrinho', {'id': produto.id}) }}" class="btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1">Remover do carrinho</a>
+                </div>
             </div>
         </div>
-    </div>
     {% endfor %}
 </div>
 {% endblock %}
