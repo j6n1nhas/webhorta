@@ -21,9 +21,10 @@ return [
     'signup' => [[], ['_controller' => 'App\\Controller\\Controller::signup'], [], [['text', '/registar']], [], [], []],
     'logout' => [[], [], [], [['text', '/logout']], [], [], []],
     'produtos' => [[], ['_controller' => 'App\\Controller\\ProdutoController::index'], [], [['text', '/produtos']], [], [], []],
-    'criar_produto' => [[], ['_controller' => 'App\\Controller\\ProdutoController::criar_produto'], [], [['text', '/produto']], [], [], []],
+    'add_produto' => [[], ['_controller' => 'App\\Controller\\ProdutoController::add_produto'], [], [['text', '/produto/add']], [], [], []],
     'admin' => [[], ['_controller' => 'App\\Controller\\AdminController::admin_index'], [], [['text', '/admin']], [], [], []],
     'carrinho' => [[], ['_controller' => 'App\\Controller\\Controller::carrinho'], [], [['text', '/carrinho']], [], [], []],
     'add_carrinho' => [['id'], ['_controller' => 'App\\Controller\\Controller::add_carrinho'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/carrinho/add']], [], [], []],
     'remove_carrinho' => [['id'], ['_controller' => 'App\\Controller\\Controller::remove_carrinho'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/carrinho/remove']], [], [], []],
+    'whereweare' => [[], ['_controller' => 'App\\Controller\\Controller::whereweare'], [], [['text', '/where-we-are']], [], [], []],
 ];

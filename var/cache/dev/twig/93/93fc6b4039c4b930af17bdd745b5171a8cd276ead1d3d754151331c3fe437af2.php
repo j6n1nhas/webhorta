@@ -138,39 +138,37 @@ class __TwigTemplate_c75e1fa5cfdb792806dae5402dada8ede2e5d306c491cbbbb6810dfa647
         foreach ($context['_seq'] as $context["_key"] => $context["produto"]) {
             // line 13
             echo "        <div class=\"card m-3 p-3 col-lg-3 col-sm-6 col-md-5\">
-            <div class=\"card-body\">
-                <img src=\"";
-            // line 15
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "foto", [], "any", false, false, false, 15), "html", null, true);
+            <img src=\"";
+            // line 14
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("media/produtos/" . twig_get_attribute($this->env, $this->source, $context["produto"], "foto", [], "any", false, false, false, 14))), "html", null, true);
             echo "\" class=\"card-img-top img-thumbnail rounded\" alt=\"Foto de ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "nome", [], "any", false, false, false, 15), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "nome", [], "any", false, false, false, 14), "html", null, true);
             echo "\">
-                <div class=\"card-body\">
-                    <h5 class=\"card-title\">";
-            // line 17
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "nome", [], "any", false, false, false, 17), "html", null, true);
+            <div class=\"card-body\">
+                <h5 class=\"card-title\">";
+            // line 16
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "nome", [], "any", false, false, false, 16), "html", null, true);
             echo "</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Preço: ";
-            // line 18
-            echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "getPrecoUnitario", [], "any", false, false, false, 18), 2, ",", "."), "html", null, true);
+                <h6 class=\"card-subtitle mb-2 text-muted\">Preço: ";
+            // line 17
+            echo twig_escape_filter($this->env, twig_number_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "getPrecoUnitario", [], "any", false, false, false, 17), 2, ",", "."), "html", null, true);
             echo "€ / ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["produto"], "unidade", [], "any", false, false, false, 18), "nome", [], "any", false, false, false, 18), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["produto"], "unidade", [], "any", false, false, false, 17), "nome", [], "any", false, false, false, 17), "html", null, true);
             echo "</h6>
-                    <p class=\"card-text\">";
-            // line 19
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "descricao", [], "any", false, false, false, 19), "html", null, true);
+                <p class=\"card-text\">";
+            // line 18
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["produto"], "descricao", [], "any", false, false, false, 18), "html", null, true);
             echo "</p>
-                </div>
-                <div class=\"card-footer row\">
-                    <a href=\"";
-            // line 22
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_carrinho", ["id" => twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 22)]), "html", null, true);
+            </div>
+            <div class=\"card-footer row\">
+                <a href=\"";
+            // line 21
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("add_carrinho", ["id" => twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 21)]), "html", null, true);
             echo "\" class=\"btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Adicionar ao carrinho</a>
-                    <a href=\"";
-            // line 23
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_carrinho", ["id" => twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 23)]), "html", null, true);
+                <a href=\"";
+            // line 22
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("remove_carrinho", ["id" => twig_get_attribute($this->env, $this->source, $context["produto"], "id", [], "any", false, false, false, 22)]), "html", null, true);
             echo "\" class=\"btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Remover do carrinho</a>
-                </div>
             </div>
         </div>
     ";
@@ -178,7 +176,7 @@ class __TwigTemplate_c75e1fa5cfdb792806dae5402dada8ede2e5d306c491cbbbb6810dfa647
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['produto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 28
+        // line 26
         echo "</div>
 ";
         
@@ -201,7 +199,7 @@ class __TwigTemplate_c75e1fa5cfdb792806dae5402dada8ede2e5d306c491cbbbb6810dfa647
 
     public function getDebugInfo()
     {
-        return array (  182 => 28,  171 => 23,  167 => 22,  161 => 19,  155 => 18,  151 => 17,  144 => 15,  140 => 13,  136 => 12,  133 => 11,  123 => 10,  105 => 8,  92 => 6,  82 => 5,  71 => 3,  61 => 2,  38 => 1,);
+        return array (  180 => 26,  170 => 22,  166 => 21,  160 => 18,  154 => 17,  150 => 16,  143 => 14,  140 => 13,  136 => 12,  133 => 11,  123 => 10,  105 => 8,  92 => 6,  82 => 5,  71 => 3,  61 => 2,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -219,17 +217,15 @@ XPTO | Produtos
 <div class=\"row\">
     {% for produto in produtos %}
         <div class=\"card m-3 p-3 col-lg-3 col-sm-6 col-md-5\">
+            <img src=\"{{ asset('media/produtos/' ~produto.foto) }}\" class=\"card-img-top img-thumbnail rounded\" alt=\"Foto de {{ produto.nome }}\">
             <div class=\"card-body\">
-                <img src=\"{{ produto.foto }}\" class=\"card-img-top img-thumbnail rounded\" alt=\"Foto de {{ produto.nome }}\">
-                <div class=\"card-body\">
-                    <h5 class=\"card-title\">{{ produto.nome }}</h5>
-                    <h6 class=\"card-subtitle mb-2 text-muted\">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
-                    <p class=\"card-text\">{{ produto.descricao }}</p>
-                </div>
-                <div class=\"card-footer row\">
-                    <a href=\"{{ path('add_carrinho', {'id': produto.id}) }}\" class=\"btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Adicionar ao carrinho</a>
-                    <a href=\"{{ path('remove_carrinho', {'id': produto.id}) }}\" class=\"btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Remover do carrinho</a>
-                </div>
+                <h5 class=\"card-title\">{{ produto.nome }}</h5>
+                <h6 class=\"card-subtitle mb-2 text-muted\">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
+                <p class=\"card-text\">{{ produto.descricao }}</p>
+            </div>
+            <div class=\"card-footer row\">
+                <a href=\"{{ path('add_carrinho', {'id': produto.id}) }}\" class=\"btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Adicionar ao carrinho</a>
+                <a href=\"{{ path('remove_carrinho', {'id': produto.id}) }}\" class=\"btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1\">Remover do carrinho</a>
             </div>
         </div>
     {% endfor %}

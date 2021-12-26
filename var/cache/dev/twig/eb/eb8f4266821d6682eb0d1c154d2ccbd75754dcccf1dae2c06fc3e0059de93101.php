@@ -89,10 +89,14 @@ class __TwigTemplate_ee30401cd81ffc73220c14ea7b8296cf250a9107eb5ec63bdd791ceac5d
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "estilos"));
 
         // line 7
-        echo "<link rel=\"stylesheet\" href=\"../vendor/leaflet/leaflet.css\">
+        echo "<link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("../vendor/leaflet/leaflet.css"), "html", null, true);
+        echo "\">
 ";
         // line 9
-        echo "<link rel=\"stylesheet\" href=\"../css/wherearewe.css\">
+        echo "<link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/wherearewe.css"), "html", null, true);
+        echo "\">
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -113,10 +117,14 @@ class __TwigTemplate_ee30401cd81ffc73220c14ea7b8296cf250a9107eb5ec63bdd791ceac5d
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "scripts"));
 
         // line 13
-        echo "<script src=\"../js/wherearewe.js\"></script>
+        echo "<script src=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/wherearewe.js"), "html", null, true);
+        echo "\"></script>
 ";
         // line 15
-        echo "<script src=\"../vendor/leaflet/leaflet.js\"></script>
+        echo "<script src=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("../vendor/leaflet/leaflet.js"), "html", null, true);
+        echo "\"></script>
 ";
         // line 17
         echo "<script async src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap\"></script>
@@ -168,7 +176,7 @@ class __TwigTemplate_ee30401cd81ffc73220c14ea7b8296cf250a9107eb5ec63bdd791ceac5d
 
     public function getDebugInfo()
     {
-        return array (  143 => 20,  133 => 19,  122 => 17,  119 => 15,  116 => 13,  106 => 11,  95 => 9,  92 => 7,  82 => 5,  71 => 3,  61 => 2,  38 => 1,);
+        return array (  151 => 20,  141 => 19,  130 => 17,  125 => 15,  120 => 13,  110 => 11,  97 => 9,  92 => 7,  82 => 5,  71 => 3,  61 => 2,  38 => 1,);
     }
 
     public function getSourceContext()
@@ -179,15 +187,15 @@ XPTO | Onde estamos
 {% endblock %}
 {% block estilos %}
 {# Carregamos o ficheiro de estilos da biblioteca LeafLet #}
-<link rel=\"stylesheet\" href=\"../vendor/leaflet/leaflet.css\">
+<link rel=\"stylesheet\" href=\"{{ asset('../vendor/leaflet/leaflet.css') }}\">
 {# Carregamos o nosso ficheiro de estilos para esta página #}
-<link rel=\"stylesheet\" href=\"../css/wherearewe.css\">
+<link rel=\"stylesheet\" href=\"{{ asset('css/wherearewe.css') }}\">
 {% endblock %}
 {% block scripts %}
 {# Carregamos o nosso ficheiro de Javascript #}
-<script src=\"../js/wherearewe.js\"></script>
+<script src=\"{{ asset('js/wherearewe.js') }}\"></script>
 {# Carregamos o ficheiro de Javascript da biblioteca LeafLet #}
-<script src=\"../vendor/leaflet/leaflet.js\"></script>
+<script src=\"{{ asset('../vendor/leaflet/leaflet.js') }}\"></script>
 {# Carregamos o script do Google maps #}
 <script async src=\"https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap\"></script>
 {% endblock %}

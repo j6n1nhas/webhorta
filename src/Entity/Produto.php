@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProdutoRepository;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * @ORM\Entity(repositoryClass=ProdutoRepository::class)
@@ -122,5 +123,34 @@ class Produto
     {
         $this->unidade = $unidade;
         return $this;
+    }
+
+    public static function loadMetadata(ClassMetadata $metadata)
+    {
+        $metadata->mapField(array(
+            'id' => true,
+            'fieldName' => 'id',
+            'type' => 'integer',
+        ));
+        $metadata->mapField(array(
+            'fieldName' => 'nome',
+            'type' => 'string'
+        ));
+        $metadata->mapField(array(
+            'fieldName' => 'descricao',
+            'type' => 'string',
+        ));
+        $metadata->mapField(array(
+            'fieldName' => 'preco_unitario',
+            'type' => 'float',
+        ));
+        $metadata->mapField(array(
+            'fieldName' => 'stock',
+            'type' => 'int',
+        ));
+        $metadata->mapField(array(
+            'fieldName' => 'unidade',
+            'type' => 'integer',
+        ));
     }
 }

@@ -5,12 +5,21 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
 
+    # Definir o diretório onde se gravam os ficheiros dos produtos
+    produtos_directory: '%kernel.project_dir%/public/media/produtos'
+
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+        bind:
+            $targetDirectory: '%produtos_directory%'
+    # Definir o serviço de upload de ficheiros
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%produtos_directory%'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:

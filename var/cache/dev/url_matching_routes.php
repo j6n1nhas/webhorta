@@ -22,8 +22,9 @@ return [
         '/registar' => [[['_route' => 'signup', '_controller' => 'App\\Controller\\Controller::signup'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'logout'], null, ['GET' => 0], null, false, false, null]],
         '/produtos' => [[['_route' => 'produtos', '_controller' => 'App\\Controller\\ProdutoController::index'], null, null, null, false, false, null]],
-        '/produto' => [[['_route' => 'criar_produto', '_controller' => 'App\\Controller\\ProdutoController::criar_produto'], null, null, null, false, false, null]],
+        '/produto/add' => [[['_route' => 'add_produto', '_controller' => 'App\\Controller\\ProdutoController::add_produto'], null, null, null, false, false, null]],
         '/carrinho' => [[['_route' => 'carrinho', '_controller' => 'App\\Controller\\Controller::carrinho'], null, null, null, false, false, null]],
+        '/where-we-are' => [[['_route' => 'whereweare', '_controller' => 'App\\Controller\\Controller::whereweare'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

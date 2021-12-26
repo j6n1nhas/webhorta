@@ -26,9 +26,9 @@ produtos:
     path: /produtos
     controller: App\Controller\ProdutoController::index
 
-criar_produto:
-    path: /produto
-    controller: App\Controller\ProdutoController::criar_produto
+add_produto:
+    path: /produto/add
+    controller: App\Controller\ProdutoController::add_produto
 
 admin:
     path: /admin
@@ -45,3 +45,7 @@ add_carrinho:
 remove_carrinho:
     path: /carrinho/remove/{id}
     controller: App\Controller\Controller::remove_carrinho
+
+whereweare:
+    path: /where-we-are
+    controller: App\Controller\Controller::whereweare

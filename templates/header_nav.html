@@ -1,4 +1,11 @@
-<h1 class="text-center m-4">AGRICULTURA BIOLÓGICA XPTO</h1>
+<div id="header" style="display: flex; flex-flow: row nowrap; justify-content: space-around;">
+  <h1 class="text-center m-4">AGRICULTURA BIOLÓGICA XPTO</h1>
+  {% if app.session.carrinho is defined %}
+    <a href="{{ path('carrinho') }}"><img src="{{ asset('media/shopping-cart-filled.png') }}" style="width: 50px; height: 50px;" alt="Carrinho de compras cheio"></a>
+  {% else %}
+    <img src="{{ asset('media/shopping-cart-empty.png') }}" style="width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;" alt="Carrinho de compras vazio">
+  {% endif %}
+</div>
 <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-secondary" style="--bs-bg-opacity: .5;">
   <div class="container-fluid">
     <a class="navbar-brand" href="{{ path('index') }}">
@@ -21,7 +28,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="UsMenuLink">
             <li><a class="dropdown-item" href="../pages/whoarewe.php">Quem somos</a></li>
-            <li><a class="dropdown-item" href="../pages/wherearewe.php">Onde estamos</a></li>
+            <li><a class="dropdown-item" href="{{ path('whereweare') }}">Onde estamos</a></li>
             <li><a class="dropdown-item" href="../pages/database.php">Base de dados</a></li>
           </ul>
         </li>
@@ -31,14 +38,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="ClientMenuLink">
             {% if app.user %}
-              <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>            
+              <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
+              <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
             {% else %}
               <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
             {% endif %}
             <li><a class="dropdown-item" href="{{ path('signup') }}">Registo</a></li>
-            {% if app.user %}
-            <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
-            {% endif %}
           </ul>
         </li>
       </ul>

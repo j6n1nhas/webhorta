@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XPTO | Produtos</title>
-</head>
-<body>
-    {% for produto in produtos %}
-    {{ produtos }}
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+{% block conteudo %}
+<h2 class="fs-1 text-center">Inserir produto</h2>
+<div class="container-fluid formulario mt-5 p-5">
+{{ form(form) }}
+</div>
+{% endblock %}
