@@ -18,6 +18,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\SignupForm;
+use App\Form\ContactForm;
 
 class Controller extends AbstractController
 {
@@ -123,7 +124,6 @@ class Controller extends AbstractController
     #[Route('/carrinho/add/{id}', name: 'add_carrinho', methods: ['POST', 'GET'])]
     public function add_carrinho(Session $session, Produto $produto, EntityManagerInterface $em)
     {
-        //$session->remove('carrinho');
         // Obtenho o produto a adicionar da base de dados
         $p = $em->getRepository(Produto::class)->find($produto);
         // Se a sessão não tiver ainda um carrinho guardado/criado
@@ -248,6 +248,29 @@ class Controller extends AbstractController
     #[Route('/where-we-are', name: 'whereweare', methods: 'GET')]
     public function whereweare()
     {
-        return $this->render('wherearewe.html');
+        return $this->render('whereweare.html');
+    }
+
+    //Função para renderizar a página de "quem somos"
+    #[Route('/who-we-are', name: 'whoweare', methods: 'GET')]
+    public function whoweare()
+    {
+        return $this->render('whoweare.html');
+    }
+
+    //Função para renderizar a página de contacto (formulário de contacto)
+    #[Route('/contact-us', name: 'contactus', methods: ['GET', 'POST'])]
+    public function contactus(Request $request)
+    {
+        $form = $this->createForm(ContactForm::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $dados = $form->getData();
+            dd($dados);
+            $this->addFlash('success', "Formulário válido");
+            return $this->redirectToRoute('index');
+        }
+        return $this->renderForm('contactus.html', ['form' => $form]);
     }
 }

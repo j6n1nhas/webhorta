@@ -1,0 +1,35 @@
+main {
+    width: 80%;
+    margin: 10%;
+}
+
+#formulario {
+    border: 3px solid black;
+    box-shadow: 2px 15px 15px 15px grey;
+    padding: 50px !important;
+    border-radius: 25px;
+    background-color: rgba(225, 220, 195, 0.9);
+}
+
+@media (orientation: landscape) and (min-width: 400px) {
+    #formulario {
+        width: 80%;
+        margin: 10%;
+    }
+
+    main {
+        width: 80%;
+        margin: 10%;
+    }
+}
+
+@media (orientation: portrait) and (min-width: 400px) {
+    #formulario {
+        width: 100%;
+    }
+
+    main {
+        width: 90%;
+        margin: 5%;
+    }
+}

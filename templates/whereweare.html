@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+XPTO | Onde estamos
+{% endblock %}
+
+{% block estilos %}
+{{ encore_entry_link_tags('app') }}
+{# Carregamos o ficheiro de estilos da biblioteca LeafLet #}
+<link rel="stylesheet" href="{{ asset('build/leaflet/leaflet.css') }}">
+{# Carregamos o nosso ficheiro de estilos para esta página #}
+<link rel="stylesheet" href="{{ asset('css/whereweare.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{# Carregamos o nosso ficheiro de Javascript #}
+{{ encore_entry_script_tags('app') }}
+{# Carregamos o ficheiro de Javascript da biblioteca LeafLet #}
+<script src="{{ asset('build/leaflet/leaflet.js') }}"></script>
+<script src="{{ asset('js/whereweare.js') }}"></script>
+{% endblock %}
+
+{% block conteudo %}
+<h2 class="text-center">Onde estamos</h2>
+<section>
+    <div id="map"></div>
+</section>
+<section id="caminho" hidden>
+    <h3>Caminho até nós</h3>
+    <div id="percurso">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated m-2" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Indicações</th><th>Distância</th><th>Sinal</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

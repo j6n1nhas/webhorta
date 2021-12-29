@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image/ico" href="{{ asset('images/favicon.ico') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     {% block estilos %}{% endblock %}
-    {% block scripts %}{% endblock %}
     <title>{% block titulo %}{% endblock %}</title>
 </head>
 <body>
@@ -18,5 +17,6 @@
     </main>
     {{ include('footer.html') }}
     <script src="../js/bootstrap.bundle.js"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

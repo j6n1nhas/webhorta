@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+XPTO | Quem somos
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/whoweare.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ asset('js/whoweare.js') }}"></script>
+{% endblock %}
+
+{% block conteudo %}
+<h2>Os nossos serviços</h2>
+<article>
+    <p>
+        A Horta do Vizinho dispõe de uma variedade de serviços para o acompanhar e aconselhar em todo o processo produtivo, respeitando o modo de produção sustentável e biológico.
+
+        Temos à sua disposição serviços completos para a sua propriedade, horta ou quintal. Contacte-nos para darmos vida ao seu terreno! 
+    </p>
+</article>
+<section id="servicos">
+    <div id="list-projetos" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#list-item-1">Nivelamento e mobilização de solos</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Drenagem e irrigação</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Limpeza de terrenos e manutenção de espaços</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-4">Montagem de estufas</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-5">Análises ao solo</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-6">Fertilização</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-7">Planos culturais</a>
+    </div>
+    <div data-bs-spy="scroll" data-bs-target="#list-projetos" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+        <h4 id="list-item-1">Item 1</h4>
+        <p>...</p>
+        <h4 id="list-item-2">Item 2</h4>
+        <p>...</p>
+        <h4 id="list-item-3">Item 3</h4>
+        <p>...</p>
+        <h4 id="list-item-4">Item 4</h4>
+        <p>...</p>
+        <h4 id="list-item-5">Item 5</h4>
+        <p>...</p>
+        <h4 id="list-item-6">Item 6</h4>
+        <p>...</p>
+        <h4 id="list-item-7">Item 7</h4>
+        <p>...</p>
+    </div>
+</section>
+<div class="progress">
+    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated bg-info w-0" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+{% endblock %}

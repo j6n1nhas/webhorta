@@ -49,3 +49,11 @@ remove_carrinho:
 whereweare:
     path: /where-we-are
     controller: App\Controller\Controller::whereweare
+
+whoweare:
+    path: /who-we-are
+    controller: App\Controller\Controller::whoweare
+
+contactus:
+    path: /contact-us
+    controller: App\Controller\Controller::contactus

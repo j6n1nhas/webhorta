@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+XPTO | Contacte-nos!
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/contactus.css') }}">
+{% endblock %}
+
+{% block scripts %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{ asset('js/contactus.js') }}"></script>
+{% endblock %}
+
+{% block conteudo %}
+<h2 class="fs-1 text-center">Contacte-nos</h2>
+<div class="container-fluid mt-5 p-5" id="formulario">
+    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true, 'autocomplete': 'off',}}) }}
+    <div class="row">
+        <div class="col-sm-6 col-lg-6 p-3">
+            {{ form_label(form.nome_proprio) }}
+            {{ form_widget(form.nome_proprio) }}
+            <div class="invalid-feedback">
+                Introduza um nome válido
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.nome_proprio) }}
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-6 p-3">
+            {{ form_label(form.nome_apelido) }}
+            {{ form_widget(form.nome_apelido) }}
+            <div class="invalid-feedback">
+                Introduza um apelido válido
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.nome_apelido) }}
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6 p-3">
+            {{ form_label(form.tipo_contacto) }}
+            {{ form_widget(form.tipo_contacto) }}
+            {{ form_help(form.tipo_contacto) }}
+            <div class="invalid-feedback">
+                Precisa de escolher um meio de contacto
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.tipo_contacto) }}
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-6 p-3">
+            {{ form_label(form.telefone) }}
+            {{ form_widget(form.telefone) }}
+            <div class="invalid-feedback">
+                Se escolheu o telefone, precisa fornecer o seu contacto
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.telefone) }}
+            </div>
+        </div>
+        <div class="col-sm-12 col-lg-12 p-3">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            <div class="invalid-feedback">
+                Se escolheu e-mail, forneça-nos o seu endereço
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-6 p-3">
+            {{ form_label(form.anexo) }}
+            {{ form_widget(form.anexo) }}
+            {{ form_help(form.anexo) }}
+            <div class="invalid-feedback">
+                Anexos: PDF ou DOCX
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.anexo) }}
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-6 p-3">
+            {{ form_label(form.mensagem) }}
+            {{ form_widget(form.mensagem) }}
+            <div class="invalid-feedback">
+                A sua mensagem é essencial!
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.mensagem) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        {{ form_widget(form.btn_submit) }}
+    </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

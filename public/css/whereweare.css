@@ -1,0 +1,33 @@
+main {
+    width: 80%;
+    margin: 10%;
+}
+
+#map {
+    width: 100%;
+    height: 600px;
+    margin-bottom: 50px;
+}
+
+#caminho {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+table {
+    box-shadow: 5px 5px 5px 5px grey;
+}
+
+#percurso>table, #percurso>table>tbody>tr>*, #percurso>table>thead>tr>* {
+    border: 3px solid black;
+    padding: 5px;
+}
+
+#percurso>table>tbody>tr>td:nth-last-child(1), #percurso>table>tbody>tr>td:nth-last-child(2) {
+    text-align: center;
+}
+
+.progress {
+    width: 100%;
+}
