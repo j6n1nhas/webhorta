@@ -20,3 +20,7 @@ async function demo()
             //progress_bar.classList.replace('w-' + ((i-1)*10).toString(), 'w-' + (i*10).toString());
     }
 }
+let scrollSpy = new bootstrap.ScrollSpy(document.body, {
+    target: '#list-projetos'
+  });
+  

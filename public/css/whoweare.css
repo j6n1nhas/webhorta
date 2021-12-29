@@ -2,9 +2,23 @@ main {
     width: 80%;
     margin: 10%;
 }
+/*
+body {
+    background: no-repeat 100% url('../images/madeira.jpg');
+}
+*/
+.accordion-body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
 
-#servicos {
-    position: relative;
-    height: 600px;
-    overflow-y: scroll;
+.accordion-descript {
+    width: 50%;
+}
+
+.accordion-foto {
+    width: 50%;
+    height: 300px;
 }

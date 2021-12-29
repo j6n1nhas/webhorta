@@ -57,3 +57,7 @@ whoweare:
 contactus:
     path: /contact-us
     controller: App\Controller\Controller::contactus
+
+sendemail:
+    path: /contact-us/send-email
+    controller: App\Controller\MailerController::sendEmail

@@ -20,6 +20,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\SignupForm;
 use App\Form\ContactForm;
 
+use App\Controller\MailerController;
+
 class Controller extends AbstractController
 {
     #[Route('/', name: 'index')]
@@ -267,9 +269,9 @@ class Controller extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $dados = $form->getData();
-            dd($dados);
+            //dd($dados);
             $this->addFlash('success', "Formulário válido");
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('sendemail');
         }
         return $this->renderForm('contactus.html', ['form' => $form]);
     }

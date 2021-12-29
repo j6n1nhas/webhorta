@@ -6,17 +6,14 @@ window.onload = () => {
     // Fetch the form we want to apply custom Bootstrap validation styles to
     const form = document.forms.contact_form;
     form.addEventListener('submit', function (event) {
-        if(!this.checkValidity())
+        if(!this.checkValidity() || check_contactos() == false)
         {
             event.preventDefault();
             event.stopPropagation();
             this.classList.add('was-validated');
         }
-        if(check_contactos() == true)
-            this.submit();
         else
-            event.preventDefault();
-        return false;
+            this.submit();
     });
 
     const telefone = document.getElementById('contact_form_telefone');
@@ -90,6 +87,7 @@ function check_contactos()
         //Devolve falso para não submeter o formulário
         return false;
     }
+    return true;
 }
 
 

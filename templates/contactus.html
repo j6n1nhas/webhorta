@@ -16,7 +16,7 @@ XPTO | Contacte-nos!
 {% block conteudo %}
 <h2 class="fs-1 text-center">Contacte-nos</h2>
 <div class="container-fluid mt-5 p-5" id="formulario">
-    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': true, 'autocomplete': 'off',}}) }}
+    {{ form_start(form, {'attr': {'action': 'sendemail', 'class': 'needs-validation', 'novalidate': true, 'autocomplete': 'off',}}) }}
     <div class="row">
         <div class="col-sm-6 col-lg-6 p-3">
             {{ form_label(form.nome_proprio) }}

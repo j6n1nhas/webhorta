@@ -62,13 +62,14 @@ class ContactForm extends AbstractType
                 'invalid_message' => 'Só são permitidos ficheiros do tipo PDF ou DOCX',
                 'help' => 'Ficheiros pdf ou docx',
                 'label' => 'Anexo(s)',
+                /*
                 'constraints' => [
                     new File(['mimeTypes' => [
                         'application/pdf',
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                         ],
                     ]),
-                ],
+                ],*/
             ])
             #->add('utilizador', EntityType::class, ['class' => User::class, 'required' => false])
             ->add('mensagem', TextareaType::class, [
