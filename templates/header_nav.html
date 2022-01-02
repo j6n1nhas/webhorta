@@ -39,7 +39,10 @@
           <ul class="dropdown-menu" aria-labelledby="ClientMenuLink">
             {% if app.user %}
               <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
-              <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
+              {% if app.session.carrinho is defined %}
+                <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="{{ path('dashboard', {'user': app.user.id}) }}">Dashboard</a></li>
             {% else %}
               <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
             {% endif %}

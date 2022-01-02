@@ -12,9 +12,9 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 
-import 'leaflet';
+import './leaflet';
 
-import 'sweetalert';
+import './sweetalert';
 
 import mensagens_fixes from "./js/nice_messages";
 console.log(mensagens_fixes(10));

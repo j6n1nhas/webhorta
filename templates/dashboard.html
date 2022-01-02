@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block estilos %}
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+{% block conteudo %}
+Esta é a dashboard de {{ app.user.nomeProprio }} {{ app.user.nomeApelido }}
+{{ dump(app.session) }}
+{% endblock %}

@@ -30,7 +30,7 @@ add_produto:
     path: /produto/add
     controller: App\Controller\ProdutoController::add_produto
 
-admin:
+admin_index:
     path: /admin
     controller: App\Controller\AdminController::admin_index
 
@@ -61,3 +61,7 @@ contactus:
 sendemail:
     path: /contact-us/send-email
     controller: App\Controller\MailerController::sendEmail
+
+dashboard:
+    path: /dashboard/{user}
+    controller: App\Controller\UserController::dashboard

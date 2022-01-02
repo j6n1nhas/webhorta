@@ -8,10 +8,10 @@ XPTO | Produtos
 {% block scripts %}
 {% endblock %}
 {% block conteudo %}
-<div class="row">
+<div class="row justify-content-evenly">
     {% for produto in produtos %}
-        <div class="card border-success shadow m-3 p-3 col-lg-3 col-sm-6 col-md-5">
-            <img src="{{ asset('media/produtos/' ~produto.foto) }}" class="card-img-top img-thumbnail rounded" alt="Foto de {{ produto.nome }}">
+        <div class="card shadow m-3 p-3 col-2">
+            <img src="{{ asset('media/produtos/' ~produto.foto) }}" class="card-img-top img-thumbnail rounded border-success" alt="Foto de {{ produto.nome }}">
             <div class="card-body">
                 <h5 class="card-title">{{ produto.nome }}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>

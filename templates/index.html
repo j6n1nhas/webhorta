@@ -5,6 +5,7 @@ A Horta XPTO
 {% endblock %}
 
 {% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
 
 {% block scripts %}
@@ -12,4 +13,44 @@ A Horta XPTO
 {% endblock %}
 
 {% block conteudo %}
+<section>
+    <div id="caroussel" class="carousel carousel-dark slide carousel-fade mt-3" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#caroussel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#caroussel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#caroussel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="{{ asset('images/horta_verde.jpg') }}" class="d-block w-100 foto" alt="Foto de horta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Horta biológica</h5>
+                    <p>Uma das nossas hortas biológicas</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{{ asset('images/couve-inzoom.jpg') }}" class="d-block w-100 foto" alt="Foto de couve">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Couve portuguesa</h5>
+                    <p>Produção biológica própria</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{{ asset('images/horta.jpg') }}" class="d-block w-100 foto" alt="Foto de horta">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Exploração agrícola</h5>
+                    <p>Vista aérea de uma das nossas hortas</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#caroussel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#caroussel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+    </div>
+</section>
 {% endblock %}

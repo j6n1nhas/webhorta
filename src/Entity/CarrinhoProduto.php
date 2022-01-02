@@ -29,7 +29,7 @@ class CarrinhoProduto
     private $carrinho;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Produto::class)
+     * @ORM\ManyToOne(targetEntity=Produto::class, inversedBy="produto_carrinho")
      * @ORM\JoinColumn(nullable=false)
      */
     private $produto;

@@ -1,9 +1,15 @@
 .card {
-    width: 20rem;
+    min-width: 15rem;
+    max-width: 20rem;
 }
 
 .card-img-top {
     width: 200px;
     height: 150px;
     align-self: center;
+}
+
+.card-footer {
+    justify-content: center;
+    background: no-repeat center/100% url('../images/madeira.jpg');
 }

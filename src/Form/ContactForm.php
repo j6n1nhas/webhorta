@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -15,6 +17,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\File;
+
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use App\Entity\User;
 
@@ -62,14 +66,22 @@ class ContactForm extends AbstractType
                 'invalid_message' => 'Só são permitidos ficheiros do tipo PDF ou DOCX',
                 'help' => 'Ficheiros pdf ou docx',
                 'label' => 'Anexo(s)',
-                /*
-                'constraints' => [
-                    new File(['mimeTypes' => [
-                        'application/pdf',
-                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                        ],
-                    ]),
-                ],*/
+            ])
+            /*
+            ->add('data_contacto', HiddenType::class, [
+                'attr' => [
+                    'value' => date('Y/m/d'),
+                ],
+            ])
+            */
+            ->add('data_contacto', DateType::class, [
+                'input' => 'datetime_immutable',
+                'widget' => 'single_text',
+                'attr' => [
+                    'hidden' => true,
+                    'value' => $options['allowed_data_contacto'],
+                    'format' => 'dd/MM/yyyy',
+                ],
             ])
             #->add('utilizador', EntityType::class, ['class' => User::class, 'required' => false])
             ->add('mensagem', TextareaType::class, [
@@ -84,5 +96,12 @@ class ContactForm extends AbstractType
                     'class' => 'btn btn-outline-success',
                 ],
             ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'allowed_data_contacto' => date('d/m/Y'),
+        ]);
     }
 }

@@ -33,6 +33,8 @@ function getLocation()
 //Função a executar se não for possível obter a informação da API Mapquest
 function error()
 {
+  get_translation();
+  /*
   //Obtemos a secção que vai receber as indicações
   const caminho = document.getElementById('caminho');
   //Obtemos o elemento que vai conter a tabela com as indicações
@@ -48,6 +50,7 @@ function error()
   caminho.appendChild(info_texto);
   //Descemos a página até ao texto criado
   caminho.scrollIntoView();
+  */
 }
 
 //Função que recebe a geolocalização do browser para gerar e mostrar o caminho até nós
@@ -86,22 +89,8 @@ function getRoute(pos)
     rua == '' ? origem_elem.textContent = 'Origem: ' + localidade : origem_elem.textContent = 'Origem: ' + rua + ", " + localidade;
     //Inserimo-lo antes da tabela com o percurso
     caminho.insertBefore(origem_elem, percurso);
-    /*
-    Excerto para fazer crescer a barra de progresso
-    let num_trocos = route.route.legs[0].maneuvers.length;
-    let elem_num = 0;
-    */
     //Iteramos sobre cada troço de indicações que recebermos
     route.route.legs[0].maneuvers.forEach(element => {
-      /*
-      Excerto para fazer crescer a barra de progresso
-      elem_num++;
-      let largura_barra = Math.round((elem_num*100)/num_trocos);
-      console.log(largura_barra.toString() + "%");
-      progress_bar.style.width = largura_barra.toString() + "%";
-      if(largura_barra == 100)
-        progress_bar.hidden = true;
-      */
       //Criamos uma linha para a tabela
       let linha = document.createElement('tr');
       //Criamos uma célula para cada elemento do troço que apresentamos
@@ -135,4 +124,27 @@ async function hitUrl(url)
   let json = await response.json();
   //Devolvemos o resultado
   return json;
+}
+
+async function get_translation()
+{
+  fetch("https://traducao2.p.rapidapi.com/", {
+    "method": "POST",
+    "headers": {
+      "content-type": "application/x-www-form-urlencoded",
+      "x-rapidapi-host": "traducao2.p.rapidapi.com",
+      "x-rapidapi-key": "48d34b56eemsh8b156f32289fd4fp1e8b47jsn96081937f243",
+    },
+    "body": {
+      "source": "en",
+      "target": "pt",
+      "text": "Hello world",
+    }
+  })
+  .then(response => {
+    console.log("A coisa correu bem: " + response);
+  })
+  .catch(err => {
+    console.error("A coisa correu mal: " + err);
+  });
 }

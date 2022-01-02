@@ -2,11 +2,7 @@ main {
     width: 80%;
     margin: 10%;
 }
-/*
-body {
-    background: no-repeat 100% url('../images/madeira.jpg');
-}
-*/
+
 .accordion-body {
     display: flex;
     flex-flow: row nowrap;

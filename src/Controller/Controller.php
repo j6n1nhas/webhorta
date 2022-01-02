@@ -22,6 +22,8 @@ use App\Form\ContactForm;
 
 use App\Controller\MailerController;
 
+use App\Service\MailSender;
+
 class Controller extends AbstractController
 {
     #[Route('/', name: 'index')]
@@ -269,9 +271,14 @@ class Controller extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $dados = $form->getData();
-            //dd($dados);
+            $data_contacto = date_parse_from_format('Y/m/d', $dados['data_contacto']);
+            dd($dados);
+            //$meio = $dados['']
+            $mailer = new MailSender($dados);
+            dd($data_contacto);
+            $mailer->setDataEnvio($dados['data_contacto']);
             $this->addFlash('success', "Formulário válido");
-            return $this->redirectToRoute('sendemail');
+            //return $this->redirectToRoute('sendemail');
         }
         return $this->renderForm('contactus.html', ['form' => $form]);
     }
