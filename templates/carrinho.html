@@ -1,22 +1,54 @@
 {% extends 'base.html' %}
-{% block estilos %}
+
+{% block titulo %}
+XPTO | Carrinho
 {% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/carrinho.css') }}">
+{% endblock %}
+
 {% block scripts %}
 {% endblock %}
+
 {% block conteudo %}
-{% if is_granted('ROLE_ADMIN') %}
-    És admin, não estás aqui a fazer nada!
-    {% else %}
-        És user
-{% endif %}
-{% if carrinho is defined %}
-    Este é o carrinho:<br>
-    {% for chave, valor in carrinho %}
-        {{ chave }}: {{ valor }}<br/>
-        {% for produto in valor %}
-            {{ produto }}: {{ valor }}
+
+<div id="carrinho" class="container-fluid">
+    <h2 class="fs-2 mb-4">Carrinho de {{ app.user.nomeProprio }} {{ app.user.nomeApelido }}</h2>
+    <ol class="list-group list-group-numbered">
+        {% for key, value in carrinho %}
+            {% if value is iterable %}
+                <li class="list-group-item d-flex w-100 justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">{{ key }}</div>
+                        Preço Unitário: {{ value.preco_unitario|number_format(2, ',', '.') }}€<br/>
+                        <small class="text-muted">Unidade: {{ value.unidade }}</small>
+                    </div>
+                    <div class="d-flex flex-column align-self-stretch justify-content-between">
+                        <span class="badge bg-success rounded-pill align-self-end">{{ value.quantidade }}</span>
+                        <span>Subtotal: {{ (value.quantidade * value.preco_unitario)|number_format(2, ',', '.') }}€</span>
+                    </div>
+                </li>
+            {% endif %}
         {% endfor %}
-    {% endfor %}
-    {{ dump(carrinho) }}
-{% endif %}
+    </ol>
+    <ul class="list-group">
+        <li class="list-group-item d-flex w-100 justify-content-between align-items-center">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Valor total</div>
+            </div>
+            <span class="fw-bold">{{ carrinho.valor_total|number_format(2, ',', '.') }}€</span>
+        </li>
+        <li class="list-group-item d-flex w-100 justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">Data da compra</div>
+            </div>
+            <span class="fw-bold">{{ carrinho.data_compra }}</span>
+        </li>
+    </ul>
+    <div class="d-grid gap-4 d-md-block mx-auto mt-3">
+        <a href="{{ path('grava_carrinho') }}" class="btn btn-outline-success btn-lg">Confirmar</a>
+        <a href="{{ path('cancela_carrinho') }}" class="btn btn-outline-warning btn-lg">Cancelar</a>
+    </div>
+</div>
 {% endblock %}

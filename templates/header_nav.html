@@ -26,7 +26,7 @@
           <a class="nav-link dropdown-toggle btn-success fs-3" href="#" id="UsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Sobre nós
           </a>
-          <ul class="dropdown-menu" aria-labelledby="UsMenuLink">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="UsMenuLink">
             <li><a class="dropdown-item" href="{{ path('whoweare') }}">Quem somos</a></li>
             <li><a class="dropdown-item" href="{{ path('whereweare') }}">Onde estamos</a></li>
             <li><a class="dropdown-item" href="{{ path('contactus') }}">Contacte-nos</a></li>
@@ -36,13 +36,13 @@
           <a class="nav-link dropdown-toggle fs-3" href="#" id="ClientMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Clientes
           </a>
-          <ul class="dropdown-menu" aria-labelledby="ClientMenuLink">
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="ClientMenuLink">
             {% if app.user %}
               <li><a class="dropdown-item" href="{{ path('logout') }}">Logout</a></li>
-              {% if app.session.carrinho is defined %}
+              {% if app.session.has('carrinho') %}
                 <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
               {% endif %}
-              <li><a class="dropdown-item" href="{{ path('dashboard', {'user': app.user.id}) }}">Dashboard</a></li>
+              <li><a class="dropdown-item" href="{{ path('dashboard', {user: app.user.id}) }}">Dashboard</a></li>
             {% else %}
               <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
             {% endif %}

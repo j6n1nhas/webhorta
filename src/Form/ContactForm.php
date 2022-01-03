@@ -80,7 +80,6 @@ class ContactForm extends AbstractType
                 'attr' => [
                     'hidden' => true,
                     'value' => $options['allowed_data_contacto'],
-                    'format' => 'dd/MM/yyyy',
                 ],
             ])
             #->add('utilizador', EntityType::class, ['class' => User::class, 'required' => false])
@@ -101,7 +100,7 @@ class ContactForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'allowed_data_contacto' => date('d/m/Y'),
+            'allowed_data_contacto' => date('Y-m-d'),
         ]);
     }
 }

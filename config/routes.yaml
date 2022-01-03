@@ -36,15 +36,23 @@ admin_index:
 
 carrinho:
     path: /carrinho
-    controller: App\Controller\Controller::carrinho
+    controller: App\Controller\CarrinhoController::carrinho
 
 add_carrinho:
     path: /carrinho/add/{id}
-    controller: App\Controller\Controller::add_carrinho
+    controller: App\Controller\CarrinhoController::add_carrinho
 
 remove_carrinho:
     path: /carrinho/remove/{id}
-    controller: App\Controller\Controller::remove_carrinho
+    controller: App\Controller\CarrinhoController::remove_carrinho
+
+grava_carrinho:
+    path: /carrinho/gravar
+    controller: App\Controller\CarrinhoController::grava_carrinho
+
+cancela_carrinho:
+    path: /carrinho/cancelar
+    controller: App\Controller\CarrinhoController::cancela_carrinho
 
 whereweare:
     path: /where-we-are
