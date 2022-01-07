@@ -14,12 +14,12 @@ XPTO | Produtos
             <img src="{{ asset('media/produtos/' ~produto.foto) }}" class="card-img-top img-thumbnail rounded border-success" alt="Foto de {{ produto.nome }}">
             <div class="card-body">
                 <h5 class="card-title">{{ produto.nome }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|number_format(2, ',', '.') }}€ / {{ produto.unidade.nome }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Preço: {{ produto.getPrecoUnitario|preco }} / {{ produto.unidade.nome }}</h6>
                 <p class="card-text">{{ produto.descricao }}</p>
             </div>
             <div class="card-footer row">
-                <a href="{{ path('add_carrinho', {'id': produto.id}) }}" class="btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1">Adicionar ao carrinho</a>
-                <a href="{{ path('remove_carrinho', {'id': produto.id}) }}" class="btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1">Remover do carrinho</a>
+                <a href="{{ path('add_carrinho', {id: produto.id}) }}" class="btn btn-outline-success col-lg-6 col-md-6 col-sm-6 p-0 m-1">Adicionar ao carrinho</a>
+                <a href="{{ path('remove_carrinho', {id: produto.id}) }}" class="btn btn-outline-danger col-lg-6 col-md-6 col-sm-6 p-0 m-1">Remover do carrinho</a>
             </div>
         </div>
     {% endfor %}

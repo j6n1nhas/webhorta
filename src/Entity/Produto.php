@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProdutoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
@@ -53,6 +55,16 @@ class Produto
      * @ORM\OneToMany(targetEntity=CarrinhoProduto::class, mappedBy="produto")
      */
     private $produto_carrinho;
+
+    public function __construct()
+    {
+        $this->produto_carrinho = new ArrayCollection();
+    }
+
+    public function getProdutoCarrinho(): Collection
+    {
+        return $this->produto_carrinho;
+    }
 
     public function getId(): ?int
     {

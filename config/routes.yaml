@@ -71,5 +71,9 @@ sendemail:
     controller: App\Controller\MailerController::sendEmail
 
 dashboard:
-    path: /dashboard/{user}
+    path: /dashboard
     controller: App\Controller\UserController::dashboard
+
+show_sell:
+    path: /dashboard/carrinho/{id}
+    controller: App\Controller\UserController::show_sell

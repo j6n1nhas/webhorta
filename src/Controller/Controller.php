@@ -29,7 +29,6 @@ class Controller extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, Session $session): Response
     {
-        dump($session);
         return $this->render('index.html', ['url' => $_SERVER['REQUEST_URI']]);
     }
 

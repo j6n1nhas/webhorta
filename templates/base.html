@@ -16,7 +16,7 @@
         {% block conteudo %}{% endblock %}
     </main>
     {{ include('footer.html') }}
-    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="{{ asset('/js/bootstrap.bundle.js') }}"></script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

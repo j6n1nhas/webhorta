@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CarrinhoRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\CarrinhoRepository")
+ * @ORM\Table(name="carrinho")
  */
 class Carrinho
 {
@@ -36,6 +38,16 @@ class Carrinho
      * @ORM\OneToMany(targetEntity=CarrinhoProduto::class, mappedBy="carrinho")
      */
     private $carrinho_produto;
+
+    public function __construct()
+    {
+        $this->carrinho_produto = new ArrayCollection();
+    }
+
+    public function getCarrinhoProduto()
+    {
+        return $this->carrinho_produto;
+    }
 
     public function getId(): ?int
     {

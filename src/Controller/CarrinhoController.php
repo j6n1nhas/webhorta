@@ -4,15 +4,14 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 use App\Entity\User;
 use App\Entity\Produto;
+use App\Entity\Carrinho;
+use App\Entity\CarrinhoProduto;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,8 +39,19 @@ class CarrinhoController extends AbstractController
 
     // Função para adicionar um produto ao carrinho
     #[Route('/carrinho/add/{id}', name: 'add_carrinho', methods: ['POST', 'GET'])]
-    public function add_carrinho(Session $session, Produto $p): Response
+    public function add_carrinho(Session $session, EntityManagerInterface $em, int $id): Response
     {
+        try
+        {
+            $p = $em->getRepository(Produto::class)->find($id);
+            if(!$p)
+                throw new Exception('Produto não existe');
+        }
+        catch(Exception $e)
+        {
+            $this->addFlash('danger', $e->getMessage());
+            return $this->redirectToRoute('produtos');
+        }
         // Se a sessão não tiver ainda um carrinho guardado/criado
         if(!$session->has('carrinho'))
         {
@@ -107,8 +117,19 @@ class CarrinhoController extends AbstractController
 
     // Função para remover um produto do carrinho
     #[Route('/carrinho/remove/{id}', name: 'remove_carrinho', methods: ['GET', 'POST'])]
-    public function remove_carrinho(Session $session, Produto $p): Response
+    public function remove_carrinho(Session $session, EntityManagerInterface $em, int $id): Response
     {
+        try
+        {
+            $p = $em->getRepository(Produto::class)->find($id);
+            if(!$p)
+                throw new Exception('Produto não existe');
+        }
+        catch(Exception $e)
+        {
+            $this->addFlash('danger', $e->getMessage());
+            return $this->redirectToRoute('produtos');
+        }
         // Se a sessão não tiver carrinho criado
         if(!$session->has('carrinho'))
         {
@@ -158,23 +179,57 @@ class CarrinhoController extends AbstractController
     }
 
 
+    //Função para gravar o carrinho na base de dados
     #[Route('/carrinho/gravar', name: 'grava_carrinho')]
     public function grava_carrinho(Session $session, EntityManagerInterface $em): Response
     {
         try
         {
+            //Obtenho o carrinho na sessão
             $carrinho = $session->get('carrinho');
+            //Descubro qual é o utilizador
+            $user = $em->getRepository(User::class)->find($carrinho['user_id']);
+            //Crio um novo objeto Carrinho
+            $new_carrinho = new Carrinho();
+            //Defino a data de compra do carrinho a partir da data no carrinho da sessão
+            $new_carrinho->setDataCompra(date_create_from_format("Y/m/d", $carrinho['data_compra']));
+            //Defino o utilizador dono do carrinho na sessão
+            $new_carrinho->setUser($user);
+            //Defino o valor total a partir do carrinho na sessão
+            $new_carrinho->setValorTotal($carrinho['valor_total']);
+            //Gravo o carrinho na base de dados
+            $em->persist($new_carrinho);
+            $em->flush();            
+            foreach($carrinho as $key => $value)
+            {
+                if(is_array($value))
+                {
+                    $cp = new CarrinhoProduto();
+                    $produto = $em->getRepository(Produto::class)->findOneBy(['nome' => $key]);
+                    $cp->setQuantidade($value['quantidade']);
+                    $cp->setPrecoUnitario($value['preco_unitario']);
+                    $cp->setProduto($produto);
+                    $cp->setCarrinho($new_carrinho);
+                    $em->persist($cp);
+                    $em->flush();
+                }
+            }
+            $session->remove('carrinho');
+            $session->save();
+            $this->addFlash('success', 'Encomenda realizada!');
+            return $this->redirectToRoute('dashboard', [
+                'user' => $this->getUser()->getNomeProprio().$this->getUser()->getNomeApelido(),
+            ]);
         }
         catch(Exception $e)
         {
             $this->addFlash('danger', $e->getMessage());
             return $this->redirectToRoute('index');
         }
-        dump($session);
-        return new Response("Gravar carrinho");
     }
 
 
+    //Função para cancelar o carrinho atual
     #[Route('/carrinho/cancelar', name: 'cancela_carrinho')]
     public function cancela_carrinho(Session $session, EntityManagerInterface $em): Response
     {
@@ -184,7 +239,7 @@ class CarrinhoController extends AbstractController
             $session->remove('carrinho');
             $session->save();
             $this->addFlash('success', 'Eliminado carrinho');
-            return $this->redirectToRoute('carrinho');
+            return $this->redirectToRoute('produtos');
         }
         catch(Exception $e)
         {

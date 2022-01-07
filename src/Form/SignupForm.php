@@ -8,9 +8,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use App\Entity\User;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
-use Symfony\Component\Validator\Constraints\IsTrue;
 
 class SignupForm extends AbstractType
 {
@@ -39,11 +42,45 @@ class SignupForm extends AbstractType
                     new Length(min: 6),
                 ],
             ])
-        ;
+            ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmitData']);
+    }
+
+    public function onPreSubmitData(FormEvent $event): void
+    {
+        $user = $event->getData();
+        $form = $event->getForm();
+        if(!$user)
+            return;
+        if(!(isset($user['nome_proprio'])))
+            $form->remove('nome_proprio');
+        if(!(isset($user['nome_apelido'])))
+            $form->remove('nome_apelido');
+        if(!(isset($user['email'])))
+            $form->remove('email');
+        if(!(isset($user['morada'])))
+            $form->remove('morada');
+        if(!(isset($user['cod_postal'])))
+            $form->remove('cod_postal');
+        if(!(isset($user['password'])))
+            $form->remove('password');
+        if(!(isset($user['password2'])))
+            $form->remove('password2');
+        $event->setData($user);
+        $form->setData($user);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => User::class]);
+    }
+
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        foreach($form->getData() as $field => $value)
+        {
+            if($field->isDisabled() && $value === null)
+                $form->remove($field);
+        }
+        return $form;
     }
 }

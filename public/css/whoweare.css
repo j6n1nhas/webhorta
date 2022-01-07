@@ -3,18 +3,36 @@ main {
     margin: 10%;
 }
 
-.accordion-body {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
+@media all and (min-width:601px) {
+    .accordion-body {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .accordion-descript {
+        width: 50%;
+    }
+
+    .accordion-foto {
+        width: 50%;
+        height: 300px;
+    }
 }
 
-.accordion-descript {
-    width: 50%;
-}
+@media (orientation: portrait) and (max-width:600px) {
+    .accordion-body {
+        display: flex;
+        flex-flow: column-reverse nowrap;
+    }
 
-.accordion-foto {
-    width: 50%;
-    height: 300px;
+    .accordion-descript {
+        display: flex;
+        justify-content: stretch;
+        align-items: stretch;
+        margin: 5px 0px;
+        width: 100%;
+        text-align: justify;
+    }
 }

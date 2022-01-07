@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CarrinhoProdutoRepository::class)
+ * @ORM\Table(name="carrinho_produto")
  */
 class CarrinhoProduto
 {
@@ -34,6 +35,11 @@ class CarrinhoProduto
      */
     private $produto;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $preco_unitario;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,7 +60,7 @@ class CarrinhoProduto
     /**
      * @return mixed
      */
-    public function getCarrinho()
+    public function getCarrinho(): ?Carrinho
     {
         return $this->carrinho;
     }
@@ -62,15 +68,16 @@ class CarrinhoProduto
     /**
      * @param mixed $carrinho
      */
-    public function setCarrinho($carrinho): void
+    public function setCarrinho(?Carrinho $carrinho): self
     {
         $this->carrinho = $carrinho;
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getProduto()
+    public function getProduto(): ?Produto
     {
         return $this->produto;
     }
@@ -78,8 +85,21 @@ class CarrinhoProduto
     /**
      * @param mixed $produto
      */
-    public function setProduto($produto): void
+    public function setProduto(?Produto $produto): self
     {
         $this->produto = $produto;
+        return $this;
+    }
+
+    public function getPrecoUnitario(): ?float
+    {
+        return $this->preco_unitario;
+    }
+
+    public function setPrecoUnitario(?float $preco_unitario): self
+    {
+        $this->preco_unitario = $preco_unitario;
+
+        return $this;
     }
 }

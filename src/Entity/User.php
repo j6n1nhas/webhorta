@@ -102,7 +102,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -124,14 +123,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -146,7 +143,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -167,7 +163,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomeProprio(string $nome_proprio): self
     {
         $this->nome_proprio = $nome_proprio;
-
         return $this;
     }
 
@@ -179,7 +174,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNomeApelido(string $nome_apelido): self
     {
         $this->nome_apelido = $nome_apelido;
-
         return $this;
     }
 
@@ -191,7 +185,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMorada(?string $morada): self
     {
         $this->morada = $morada;
-
         return $this;
     }
 
@@ -203,7 +196,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCodPostal(?string $cod_postal): self
     {
         $this->cod_postal = $cod_postal;
-
         return $this;
     }
 
@@ -217,23 +209,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function addCarrinho(Carrinho $carrinho): self
     {
-        if (!$this->carrinhos->contains($carrinho)) {
+        if (!$this->carrinhos->contains($carrinho))
+        {
             $this->carrinhos[] = $carrinho;
             $carrinho->setUser($this);
         }
-
         return $this;
     }
 
     public function removeCarrinho(Carrinho $carrinho): self
     {
-        if ($this->carrinhos->removeElement($carrinho)) {
+        if ($this->carrinhos->removeElement($carrinho))
+        {
             // set the owning side to null (unless already changed)
             if ($carrinho->getUser() === $this) {
                 $carrinho->setUser(null);
             }
         }
-
         return $this;
     }
 }
