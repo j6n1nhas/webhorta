@@ -43,7 +43,11 @@
               {% if app.session.has('carrinho') %}
                 <li><a class="dropdown-item" href="{{ path('carrinho') }}">Carrinho</a></li>
               {% endif %}
-              <li><a class="dropdown-item" href="{{ path('dashboard') }}">Dashboard</a></li>
+              {% if is_granted('ROLE_ADMIN') %}
+                <li><a class="dropdown-item" href="{{ path('admin_index') }}">Dashboard</a></li>
+              {% elseif is_granted('ROLE_USER') %}
+                <li><a class="dropdown-item" href="{{ path('dashboard') }}">Dashboard</a></li>
+              {% endif %}
             {% else %}
               <li><a class="dropdown-item" href="{{ path('login') }}">Login</a></li>
             {% endif %}

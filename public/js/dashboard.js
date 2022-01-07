@@ -67,17 +67,20 @@ window.onload = () => {
             password2.parentElement.hidden = true;
         }
     });
+
+    //Correr rotina para colorir estado das encomendas
+    check_status();
 }
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
-    'use strict'
+    'use strict';
     const form = document.forms.signup_form;
     form.addEventListener('submit', function (event) {
         if(!form.checkValidity())
         {
-            event.preventDefault()
-            event.stopPropagation()
+            event.preventDefault();
+            event.stopPropagation();
         }
         form.classList.add('was-validated');
     }, false);
@@ -93,4 +96,20 @@ function check_passwords()
         pass2.setCustomValidity("As passwords têm que ser iguais");
     else
         pass2.setCustomValidity('');
+}
+
+//Função para colorir a informação de estado da encomenda
+function check_status()
+{
+    'use strict';
+    const ESTADOS_POSSIVEIS = {
+        'Recebido': 'text-primary',
+        'Aprovado': 'text-success',
+        'Pendente': 'text-warning',
+        'Entregue': 'text-muted',
+        'Cancelado': 'text-danger',
+    };
+    const estados_carrinhos = document.getElementsByClassName('estado-carrinho');
+    for(let elemento of estados_carrinhos)
+        elemento.classList.add(ESTADOS_POSSIVEIS[elemento.textContent]);
 }

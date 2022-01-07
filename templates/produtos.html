@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+
 {% block titulo %}
 XPTO | Produtos
 {% endblock %}
+
 {% block estilos %}
 <link rel="stylesheet" type="text/css" href="{{ asset('css/produtos.css') }}">
 {% endblock %}
+
 {% block scripts %}
+<script src="{{ asset('/js/produtos.js') }}"></script>
 {% endblock %}
+
 {% block conteudo %}
 <div class="row justify-content-evenly">
     {% for produto in produtos %}

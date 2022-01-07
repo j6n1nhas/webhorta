@@ -112,6 +112,7 @@ XPTO | {{ app.user.getNomeProprio() }} {{ app.user.getNomeApelido() }}
                             <small>{{ carrinho.getDataCompra|date("d/m/Y") }}</small>
                         </div>
                         <p class="mb-1">Valor total: {{ carrinho.getValorTotal|preco }}</p>
+                        <p class="mb-1">Estado: <span class="fw-bold estado-carrinho">{{ carrinho.estado }}</span></p>
                         <small>Items: {{ carrinho.getCarrinhoProduto|length }}</small>
                     </a>
                 {% endfor %}

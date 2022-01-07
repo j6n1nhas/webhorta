@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\DBAL\Exception\ServerException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -39,9 +40,15 @@ class Carrinho
      */
     private $carrinho_produto;
 
+    /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $estado;
+
     public function __construct()
     {
         $this->carrinho_produto = new ArrayCollection();
+        $this->setEstado('Recebido');
     }
 
     public function getCarrinhoProduto()
@@ -84,6 +91,25 @@ class Carrinho
     public function setValorTotal(float $valor_total): self
     {
         $this->valor_total = $valor_total;
+        return $this;
+    }
+
+    public function getEstado(): ?string
+    {
+        return $this->estado;
+    }
+
+    public function setEstado(?string $estado): self
+    {
+        //A ideia é começar com Recebido e apenas aceitar um destes estados
+        $possible_estados = array(
+            'Recebido',
+            'Aprovado',
+            'Pendente',
+            'Entregue',
+            'Cancelado',
+        );
+        in_array($estado, $possible_estados) ? $this->estado = $estado : $this->estado = null;
         return $this;
     }
 }

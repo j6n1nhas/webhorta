@@ -13,15 +13,7 @@ class TwigExtension extends AbstractExtension
         return [
             new TwigFilter('preco', [$this, 'formatPreco']),
             new TwigFilter('slugify', [$this, 'slugifica']),
-            new TwigFilter('truncatewords', [$this, 'truncateWords']),
         ];
-    }
-
-    public function truncateWords(string $input, int $palavras): string
-    {
-        $result = '';
-        
-        return $result;
     }
 
     public function getFunctions()

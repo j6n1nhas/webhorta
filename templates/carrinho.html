@@ -48,6 +48,12 @@ XPTO | Carrinho
                 </div>
                 <span class="fw-bold">{{ carrinho.getDataCompra|date("d/m/Y") }}</span>
             </li>
+            <li class="list-group-item d-flex w-100 justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Estado da compra</div>
+                </div>
+                <span class="fw-bold">{{ carrinho.estado }}</span>
+            </li>
         </ul>
         <div class="d-grid gap-4 d-md-block mx-auto mt-3">
             <a href="{{ referer }}" class="btn btn-outline-secondary btn-lg">Voltar...</a>
