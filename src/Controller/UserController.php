@@ -3,20 +3,15 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\User;
-use App\Entity\Produto;
 use App\Entity\Carrinho;
 use App\Entity\CarrinhoProduto;
 
 use App\Form\SignupForm;
-use App\Repository\CarrinhoRepository;
 use Doctrine\ORM\EntityNotFoundException;
-use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;

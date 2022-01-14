@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UnidadeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
- * @ORM\Entity(repositoryClass=UnidadeRepository::class)
+ * @ApiResource()
+ * @ORM\Entity(repositoryClass="App\Repository\UnidadeRepository")
  */
 class Unidade
 {
@@ -47,7 +48,6 @@ class Unidade
     public function setNome(string $nome): self
     {
         $this->nome = $nome;
-
         return $this;
     }
 
@@ -61,23 +61,22 @@ class Unidade
 
     public function addProduto(Produto $produto): self
     {
-        if (!$this->produtos->contains($produto)) {
+        if(!$this->produtos->contains($produto))
+        {
             $this->produtos[] = $produto;
             $produto->setUnidade($this);
         }
-
         return $this;
     }
 
     public function removeProduto(Produto $produto): self
     {
-        if ($this->produtos->removeElement($produto)) {
+        if($this->produtos->removeElement($produto))
+        {
             // set the owning side to null (unless already changed)
-            if ($produto->getUnidade() === $this) {
+            if($produto->getUnidade() === $this)
                 $produto->setUnidade(null);
-            }
         }
-
         return $this;
     }
 }

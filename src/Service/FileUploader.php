@@ -19,15 +19,22 @@ class FileUploader
 
     public function upload(UploadedFile $file, $nome)
     {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($nome);
         $filename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
         try
         {
+            $dir_handle = opendir($this->getTargetDirectory());
+            while(false !== ($entry = readdir($dir_handle)))
+            {
+                $fname = pathinfo($entry, PATHINFO_FILENAME);
+                if(str_contains($fname, $safeFilename))
+                    unlink($this->getTargetDirectory().'/'.$entry);
+            }
             $file->move($this->getTargetDirectory(), $filename);
         }
         catch(FileException $e)
-        {}
+        {
+        }
         return $filename;
     }
 

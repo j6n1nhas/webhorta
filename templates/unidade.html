@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+{% if app.request.getPathInfo == '/admin/unidades/add' %}
+    ADMIN | ADD_UNIDADE
+{% else %}
+    ADMIN | EDIT_UNIDADE
+{% endif %}
+{% endblock %}
+
+{% block estilos %}
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block conteudo %}
+{% if app.request.getPathInfo == '/admin/unidades/add' %}
+    <h2 class="fs-2 mt-3 text-center">Inserir unidade</h2>
+{% else %}
+    <h2 class="fs-2 mt-3 text-center">Alterar unidade</h2>
+{% endif %}
+<div class="container-sm formulario mt-5 p-5">
+    {{ form_start(form) }}
+        {{ form_row(form.nome) }}
+        {% if app.request.getPathInfo == '/admin/unidades/add' %}
+            {{ form_row(form.submit) }}
+        {% else %}
+            {{ form_row(form.submit, {'label': 'Alterar'}) }}
+        {% endif %}
+    {{ form_end(form) }}
+    <a href="{{ path('admin_index') }}" class="btn btn-warning">Cancelar</a>
+</div>
+{% endblock %}

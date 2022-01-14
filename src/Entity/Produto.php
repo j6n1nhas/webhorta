@@ -137,6 +137,11 @@ class Produto
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getNome();
+    }
+
     public static function loadMetadata(ClassMetadata $metadata)
     {
         $metadata->mapField(array(

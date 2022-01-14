@@ -1,4 +1,4 @@
-<div id="header" style="display: flex; flex-flow: row nowrap; justify-content: space-around;">
+<div id="header" class="justify-content-around" style="display: flex; flex-flow: row nowrap;">
   <h1 class="text-center m-4">AGRICULTURA BIOLÓGICA XPTO</h1>
   {% if app.session.carrinho is defined %}
     <a href="{{ path('carrinho') }}"><img src="{{ asset('media/shopping-cart-filled.png') }}" style="width: 50px; height: 50px;" alt="Carrinho de compras cheio"></a>
@@ -24,7 +24,7 @@
           <a class="{% if 'produtos' in app.request.pathInfo %}nav-link active{% else %}nav-link{% endif %} fs-3" href="{{ path('produtos') }}">Produtos</a>
         </li>
         <li class="nav-item dropdown px-2">
-          <a class="nav-link dropdown-toggle btn-success fs-3" href="#" id="UsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle btn-info fs-3" href="#" id="UsMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Sobre nós
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="UsMenuLink">
@@ -34,8 +34,12 @@
           </ul>
         </li>
         <li class="nav-item dropdown px-2">
-          <a class="nav-link dropdown-toggle fs-3" href="#" id="ClientMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle btn-info fs-3" href="#" id="ClientMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if is_granted('ROLE_ADMIN') %}
+            Admin
+            {% else %}
             Clientes
+            {% endif %}
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="ClientMenuLink">
             {% if app.user %}

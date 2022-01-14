@@ -26,13 +26,37 @@ produtos:
     path: /produtos
     controller: App\Controller\ProdutoController::index
 
-add_produto:
-    path: /produto/add
-    controller: App\Controller\ProdutoController::add_produto
-
 admin_index:
     path: /admin
     controller: App\Controller\AdminController::admin_index
+
+admin_produto_add:
+    path: /admin/produtos/add
+    controller: App\Controller\AdminController::add_produto
+
+admin_produto_edit:
+    path: /admin/produtos/{id<\d+>}
+    controller: App\Controller\AdminController::edit_produto
+
+admin_produto_delete:
+    path: /admin/produtos/delete/{id<\d+>}
+    controller: App\Controller\AdminController::delete_produto
+
+admin_unidade_add:
+    path: /admin/unidades/add
+    controller: App\Controller\AdminController::add_unidade
+
+admin_unidade_edit:
+    path: /admin/unidades/{id<\d+>}
+    controller: App\Controller\AdminController::edit_unidade
+
+admin_carrinho_edit:
+    path: /admin/carrinho/{id<\d+>}
+    controller: App\Controller\AdminController::edit_carrinho
+
+admin_utilizador_edit:
+    path: /admin/utilizador/{id}
+    controller: App\Controller\AdminController::edit_utilizador
 
 carrinho:
     path: /carrinho

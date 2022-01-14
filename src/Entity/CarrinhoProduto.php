@@ -6,7 +6,7 @@ use App\Repository\CarrinhoProdutoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CarrinhoProdutoRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\CarrinhoProdutoRepository")
  * @ORM\Table(name="carrinho_produto")
  */
 class CarrinhoProduto
@@ -99,7 +99,6 @@ class CarrinhoProduto
     public function setPrecoUnitario(?float $preco_unitario): self
     {
         $this->preco_unitario = $preco_unitario;
-
         return $this;
     }
 }

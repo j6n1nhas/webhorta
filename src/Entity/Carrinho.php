@@ -3,10 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\Exception\ServerException;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\CarrinhoRepository")
  * @ORM\Table(name="carrinho")
  */
@@ -41,7 +42,7 @@ class Carrinho
     private $carrinho_produto;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=false)
      */
     private $estado;
 
@@ -103,10 +104,10 @@ class Carrinho
     {
         //A ideia é começar com Recebido e apenas aceitar um destes estados
         $possible_estados = array(
-            'Recebido',
-            'Aprovado',
-            'Pendente',
-            'Entregue',
+            'Recebido', //Default
+            'Aprovado', //Quando o administrador aceita o pedido
+            'Pendente', //Quando o pedido está para distribuição
+            'Entregue', //Quando o pedido está entregue
             'Cancelado',
         );
         in_array($estado, $possible_estados) ? $this->estado = $estado : $this->estado = null;

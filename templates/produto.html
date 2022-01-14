@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
+
+{% block titulo %}
+ADMIN | ADD_PRODUTO
+{% endblock %}
+
 {% block estilos %}
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 {% endblock %}
+
 {% block scripts %}
 {% endblock %}
+
 {% block conteudo %}
-<h2 class="fs-1 text-center">Inserir produto</h2>
+{% if app.request.getPathInfo == '/admin/produtos/add' %}
+    <h2 class="fs-2 mt-3 text-center">Inserir produto</h2>
+{% else %}
+    <h2 class="fs-2 mt-3 text-center">Alterar produto</h2>
+{% endif %}
 <div class="container-fluid formulario mt-5 p-5">
-{{ form(form) }}
+    {{ form(form) }}
+    <a href="{{ path('admin_index') }}" class="btn btn-warning">Cancelar</a>
 </div>
 {% endblock %}

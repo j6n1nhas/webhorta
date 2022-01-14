@@ -71,6 +71,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $carrinhos;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $ativo;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $localidade;
+
     public function __construct()
     {
         $this->carrinhos = new ArrayCollection();
@@ -226,6 +236,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $carrinho->setUser(null);
             }
         }
+        return $this;
+    }
+
+    public function getAtivo(): ?bool
+    {
+        return $this->ativo;
+    }
+
+    public function setAtivo(?bool $ativo): self
+    {
+        $this->ativo = $ativo;
+
+        return $this;
+    }
+
+    public function getLocalidade(): ?string
+    {
+        return $this->localidade;
+    }
+
+    public function setLocalidade(?string $localidade): self
+    {
+        $this->localidade = $localidade;
+
         return $this;
     }
 }
