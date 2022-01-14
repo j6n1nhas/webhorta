@@ -1,4 +1,5 @@
 window.onload = () => {
+    /*
     const change_kart_state = document.querySelectorAll('.btn_change_kart_status');
     const estados = [
         'Aprovado',
@@ -34,8 +35,7 @@ window.onload = () => {
                 },
             });
         });
-    }
-
+    }*/
     const check_elems = document.getElementsByClassName('check');
     const btn_delete_elems = document.getElementsByClassName('btn-danger');
     Object.entries(check_elems).forEach((element, index) => {
@@ -46,4 +46,22 @@ window.onload = () => {
                 btn_delete_elems[index].hidden = true;
         });
     });
+
+    check_status();
+}
+
+//Função para colorir a informação de estado da encomenda
+function check_status()
+{
+    'use strict';
+    const ESTADOS_POSSIVEIS = {
+        'Recebido': 'text-primary',
+        'Aprovado': 'text-info',
+        'Pendente': 'text-warning',
+        'Entregue': 'text-success',
+        'Cancelado': 'text-danger',
+    };
+    const estados_carrinhos = document.getElementsByClassName('estado-carrinho');
+    for(let elemento of estados_carrinhos)
+        elemento.classList.add(ESTADOS_POSSIVEIS[elemento.textContent]);
 }

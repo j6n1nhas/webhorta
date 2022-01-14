@@ -100,7 +100,15 @@ XPTO | Carrinho
             </div>
         {% endif %}
     {% else %}
-        {{ form(form) }}
+        <div class="formulario p-5 container-sm">
+            {{ form_start(form) }}
+                {{ form_row(form.estado) }}
+                <div class="row">
+                    {{ form_widget(form.btn_submit, {'attr': {'class': 'col-sm-6 btn btn-outline-success'}}) }}
+                    <a href="{{ path('admin_index') }}" class="btn btn-outline-warning col-sm-6">Cancelar</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
     {% endif %}
 </div>
 {% endblock %}

@@ -50,7 +50,15 @@ admin_unidade_edit:
     path: /admin/unidades/{id<\d+>}
     controller: App\Controller\AdminController::edit_unidade
 
+admin_unidade_delete:
+    path: /admin/unidades/delete/{id<\d+>}
+    controller: App\Controller\AdminController::delete_unidade
+
 admin_carrinho_edit:
+    path: /admin/carrinho/{id<\d+>}
+    controller: App\Controller\AdminController::edit_carrinho
+
+admin_carrinho_change_state:
     path: /admin/carrinho/{id<\d+>}
     controller: App\Controller\AdminController::edit_carrinho
 

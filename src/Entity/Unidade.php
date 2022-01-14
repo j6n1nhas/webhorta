@@ -26,7 +26,7 @@ class Unidade
     private $nome;
 
     /**
-     * @ORM\OneToMany(targetEntity=Produto::class, mappedBy="unidade")
+     * @ORM\OneToMany(targetEntity="Produto", mappedBy="unidade")
      */
     private $produtos;
 

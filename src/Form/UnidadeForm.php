@@ -7,8 +7,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use App\Entity\Produto;
 use App\Entity\Unidade;
 use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UnidadeForm extends AbstractType
 {
@@ -16,6 +18,12 @@ class UnidadeForm extends AbstractType
     {
         $builder
         ->add('nome', TextType::class)
+        ->add('produtos', EntityType::class, [
+            'class' => Produto::class,
+            'choice_label' => 'nome',
+            'multiple' => true,
+            'expanded' => false,
+        ])
         ->add('submit', SubmitType::class, ['label' => 'Registar']);
     }
 
@@ -24,11 +32,5 @@ class UnidadeForm extends AbstractType
         $resolver->setDefaults([
             'data_class' => Unidade::class,
         ]);
-        $resolver->setDefault('label', function(Options $options) {
-            if($options['label'] === true)
-                $this->getParent()->get('btn_submit')->setLabel('Registar');
-            else
-                return 'Alterar';
-        });
     }
 }

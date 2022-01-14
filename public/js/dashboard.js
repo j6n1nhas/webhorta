@@ -104,9 +104,9 @@ function check_status()
     'use strict';
     const ESTADOS_POSSIVEIS = {
         'Recebido': 'text-primary',
-        'Aprovado': 'text-success',
+        'Aprovado': 'text-info',
         'Pendente': 'text-warning',
-        'Entregue': 'text-muted',
+        'Entregue': 'text-success',
         'Cancelado': 'text-danger',
     };
     const estados_carrinhos = document.getElementsByClassName('estado-carrinho');

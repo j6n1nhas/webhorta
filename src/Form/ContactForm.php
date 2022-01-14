@@ -49,7 +49,7 @@ class ContactForm extends AbstractType
                 'invalid_message' => 'O telefone é constituído por 9 dígitos',
                 'constraints' => [
                     new Length(exactly: 9),
-                    new Regex('/\d{9}/'),
+                    new Regex('/((^91|^93|^92|^96)\d{7})|(^2\d{8})/'),
                 ],
                 'attr' => [
                     'pattern' => '\d{9}',

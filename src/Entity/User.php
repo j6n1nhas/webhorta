@@ -10,12 +10,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 # Para a validação de campos
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\LengthValidator;
 use Symfony\Component\Validator\Constraints\Regex;
 
 /**
@@ -138,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles[] = $roles;
         return $this;
     }
 
@@ -232,9 +230,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->carrinhos->removeElement($carrinho))
         {
             // set the owning side to null (unless already changed)
-            if ($carrinho->getUser() === $this) {
+            if ($carrinho->getUser() === $this)
                 $carrinho->setUser(null);
-            }
         }
         return $this;
     }
@@ -247,7 +244,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAtivo(?bool $ativo): self
     {
         $this->ativo = $ativo;
-
         return $this;
     }
 
@@ -259,7 +255,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLocalidade(?string $localidade): self
     {
         $this->localidade = $localidade;
-
         return $this;
     }
 }

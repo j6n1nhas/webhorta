@@ -1,8 +1,22 @@
-main {
-    width: 80%;
-    margin: 50px 10%;
+@media (min-width:401px) or (orientation:landscape) {
+    main {
+        width: 80%;
+        margin: 50px 10%;
+    }
+
+    #carrinho {
+        width: 60%;
+    }
 }
 
-#carrinho {
-    width: 60%;
+@media (orientation:portrait) or (max-width:400px) {
+    main {
+        width: 90%;
+        margin: 5%;
+    }
+
+    #carrinho {
+        width: 100%;
+        margin: 0%;
+    }
 }

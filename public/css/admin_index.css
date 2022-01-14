@@ -1,0 +1,6 @@
+@media (orientation:portrait) or (max-width:800px) {
+    main {
+        width: 90%;
+        margin: 5%;
+    }
+}

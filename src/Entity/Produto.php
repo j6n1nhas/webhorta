@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
- * @ORM\Entity(repositoryClass=ProdutoRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ProdutoRepository")
  */
 class Produto
 {
@@ -46,13 +46,13 @@ class Produto
     private $foto;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Unidade::class, inversedBy="produtos")
+     * @ORM\ManyToOne(targetEntity="Unidade", inversedBy="produtos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $unidade;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarrinhoProduto::class, mappedBy="produto")
+     * @ORM\OneToMany(targetEntity="CarrinhoProduto", mappedBy="produto")
      */
     private $produto_carrinho;
 
@@ -134,6 +134,7 @@ class Produto
     public function setUnidade(?Unidade $unidade): self
     {
         $this->unidade = $unidade;
+        $unidade->addProduto($this);
         return $this;
     }
 

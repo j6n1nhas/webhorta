@@ -16,11 +16,21 @@ class TwigExtension extends AbstractExtension
         ];
     }
 
+
     public function getFunctions()
     {
         return [
             new TwigFunction('slugit', [$this, 'slugIt']),
+            new TwigFunction('pluralize', [$this, 'pluralize']),
         ];
+    }
+
+    //Função que recebe uma string e consoante o argumento $num, pluraliza a string ou não
+    public function pluralize(string $item, int $num=1)
+    {
+        if($num>1)
+            return $item.'s';
+        return $item;
     }
 
     public function slugIt(array $args): string
@@ -50,6 +60,7 @@ class TwigExtension extends AbstractExtension
         return $result;
     }
 
+    //Filtro para devolver o $numero formatado em preço em €uros
     public function formatPreco(float $numero, int $decimal = 2, string $decimalSep = ',', string $milSep = '.'): string
     {
         $preco = number_format($numero, $decimal, $decimalSep, $milSep);

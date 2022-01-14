@@ -26,7 +26,7 @@ class Carrinho
     private $data_compra;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="carrinhos")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="carrinhos")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -37,7 +37,7 @@ class Carrinho
     private $valor_total;
 
     /**
-     * @ORM\OneToMany(targetEntity=CarrinhoProduto::class, mappedBy="carrinho")
+     * @ORM\OneToMany(targetEntity="CarrinhoProduto", mappedBy="carrinho")
      */
     private $carrinho_produto;
 
