@@ -8,6 +8,9 @@ use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
+    /**
+     * @return array
+     */
     public function getFilters()
     {
         return [
@@ -16,7 +19,9 @@ class TwigExtension extends AbstractExtension
         ];
     }
 
-
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return [
