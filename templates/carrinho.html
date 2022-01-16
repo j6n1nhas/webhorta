@@ -97,6 +97,7 @@ XPTO | Carrinho
             <div class="d-grid gap-4 d-md-block mx-auto mt-3">
                 <a href="{{ path('grava_carrinho') }}" class="btn btn-outline-success btn-lg">Confirmar</a>
                 <a href="{{ path('cancela_carrinho') }}" class="btn btn-outline-warning btn-lg">Cancelar</a>
+                <a href="{{ app.request.server.get('HTTP_REFERER') }}" class="btn btn-outline-secondary btn-lg">Voltar...</a>
             </div>
         {% endif %}
     {% else %}

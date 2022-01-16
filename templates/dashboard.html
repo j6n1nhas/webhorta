@@ -71,6 +71,11 @@ XPTO | {{ app.user.getNomeProprio() }} {{ app.user.getNomeApelido() }}
                 </div>
                 <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_cod_postal">Alterar</button>
             </div>
+            <div class="dados-item col-12">
+                {{ form_label(form.localidade) }}
+                {{ form_widget(form.localidade, {'attr': {'disabled': true}}) }}
+                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_localidade">Alterar</button>
+            </div>
             <div class="dados-item col-12" hidden>
                 {{ form_label(form.password) }}
                 {{ form_widget(form.password, {'attr': {'hidden': true, 'disabled': true, 'minlength': 6}}) }}

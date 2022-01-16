@@ -65,12 +65,6 @@ class CarrinhoController extends AbstractController
                     'unidade' => $p->getUnidade()->getNome(),
                 ),
             );
-            // Crio o carrinho na sessão
-            $session->set('carrinho', $carrinho);
-            // Crio uma mensagem de sucesso para o utilizador que será renderizada através do ficheiro mesages.html
-            $this->addFlash('success', "Adicionado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." ao seu carrinho");
-            // Redireciono o utilizador para a página de produtos
-            return $this->redirectToRoute('produtos');
         }
         // Se já houver um carrinho criado na sessão
         else
@@ -80,6 +74,12 @@ class CarrinhoController extends AbstractController
             // Verifico se o produto a adicionar já existe no carrinho
             if(array_key_exists($p->getNome(), $carrinho))
             {
+                //Se o utilizador quiser mais do que o stock, notificar o utilizador e voltar para produtos
+                if($p->getStock() == $carrinho[$p->getNome()]['quantidade'])
+                {
+                    $this->addFlash('info', sprintf("O nosso stock de %s é %d, não podemos fornecer-lhe mais", $p->getNome(), $p->getStock()));
+                    return $this->redirectToRoute('produtos');
+                }
                 // Incremento a quantidade
                 $carrinho[$p->getNome()]['quantidade'] += 1;
                 // Atualizo o valor total da encomenda
@@ -105,7 +105,7 @@ class CarrinhoController extends AbstractController
         // Defino o carrinho na sessão
         $session->set('carrinho', $carrinho);
         // Crio uma mensagem de sucesso para o utilizador que será renderizada através do ficheiro messages.html
-        $this->addFlash('success', "Adicionado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." ao seu carrinho");
+        $this->addFlash('success', sprintf("Adicionado 1 %s de %s ao seu carrinho", $p->getUnidade()->getNome(), $p->getNome()));
         // Gravo a sessão
         $session->save();
         // Redireciono o utilizador para a página de produtos
@@ -142,7 +142,7 @@ class CarrinhoController extends AbstractController
         if(!array_key_exists($p->getNome(), $carrinho))
         {
             // Notifico o utilizador
-            $this->addFlash("danger", "O carrinho não tem ".$p->getNome());
+            $this->addFlash("danger", sprintf("O carrinho não tem %s", $p->getNome()));
             // Redireciono-o para a página de produtos
             return $this->redirectToRoute('produtos');
         }
@@ -152,7 +152,7 @@ class CarrinhoController extends AbstractController
             // Elimino o produto do carrinho
             unset($carrinho[$p->getNome()]);
             // Notifico o utilizador que ficou sem este produto no carrinho
-            $this->addFlash('info', "Ficou sem ".$p->getNome()." no carrinho");
+            $this->addFlash('info', sprintf("Ficou sem %s no carrinho", $p->getNome()));
         }
         // Se a quantidade deste produto no carrinho for superior a 1, diminuo 1 à quantidade existente
         elseif($carrinho[$p->getNome()]['quantidade'] > 1)
@@ -172,7 +172,7 @@ class CarrinhoController extends AbstractController
             $session->set('carrinho', $carrinho);
         $session->save();
         // Notifico o utilizador que foi diminuída a quantidade de produto no carrinho
-        $this->addFlash("success", "Retirado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." do carrinho");
+        $this->addFlash("success", sprintf("Retirado 1 %s de %s do carrinho", $p->getUnidade()->getNome(), $p->getNome()));
         // Redireciono o utilizador para a página de produtos
         return $this->redirectToRoute('produtos');
     }
@@ -196,29 +196,50 @@ class CarrinhoController extends AbstractController
             $new_carrinho->setUser($user);
             //Defino o valor total a partir do carrinho na sessão
             $new_carrinho->setValorTotal($carrinho['valor_total']);
-            //Gravo o carrinho na base de dados
-            $em->persist($new_carrinho);
-            $em->flush();            
+            //Percorro o carrinho à procura de arrays(produtos)
             foreach($carrinho as $key => $value)
             {
+                //Por cada produto no carrinho
                 if(is_array($value))
                 {
+                    //Crio uma linha de carrinho
                     $cp = new CarrinhoProduto();
+                    //Obtenho o produto da base de dados
                     $produto = $em->getRepository(Produto::class)->findOneBy(['nome' => $key]);
+                    //Se a quantidade no carrinho for superior ao stock do produto
+                    if($produto->getStock() < $value['quantidade'])
+                    {
+                        //Obtenho a diferença entre a quantidade no carrinho e o stock do produto
+                        $diferenca_qtd = $value['quantidade'] - $produto->getStock();
+                        //Mudo a quantidade no carrinho para o stock do produto
+                        $value['quantidade'] = $produto->getStock();
+                        //Calculo o valor da diferença
+                        $diferenca_valor = round(($value['preco_unitario'] * $diferenca_qtd), PHP_ROUND_HALF_UP);
+                        //E atualizo o valor total do carrinho diminuindo a diferença de valor
+                        $new_carrinho->setValorTotal($carrinho['valor_total'] - $diferenca_valor);
+                        //Informo o utilizador de que a quantidade foi alterada no carrinho
+                        $this->addFlash('warning', sprintf('Tinha %d %ss de %s no seu carrinho mas de momento só podemos entregar-lhe %d', $value['quantidade']+$diferenca_qtd, $produto->getUnidade()->getNome(), $produto->getNome(), $produto->getStock()));
+                    }
+                    //Defino os atributos da linha do carrinho
                     $cp->setQuantidade($value['quantidade']);
                     $cp->setPrecoUnitario($value['preco_unitario']);
                     $cp->setProduto($produto);
                     $cp->setCarrinho($new_carrinho);
+                    //Abato o stock ao produto
+                    $produto->setStock($produto->getStock()-$value['quantidade']);
+                    //Dou ordem para persistir na base de dados a linha do carrinho
                     $em->persist($cp);
-                    $em->flush();
                 }
             }
+            //Dou ordem para persistir o carrinho na base de dados
+            $em->persist($new_carrinho);
+            //Gravo todas as alterações na base de dados
+            $em->flush();
+            //Removo o carrinho da sessão e gravo-a
             $session->remove('carrinho');
             $session->save();
             $this->addFlash('success', 'Encomenda realizada!');
-            return $this->redirectToRoute('dashboard', [
-                'user' => $this->getUser()->getNomeProprio().$this->getUser()->getNomeApelido(),
-            ]);
+            return $this->redirectToRoute('dashboard');
         }
         catch(Exception $e)
         {
@@ -230,7 +251,7 @@ class CarrinhoController extends AbstractController
 
     //Função para cancelar o carrinho atual
     #[Route('/carrinho/cancelar', name: 'cancela_carrinho')]
-    public function cancela_carrinho(Session $session, EntityManagerInterface $em): Response
+    public function cancela_carrinho(Session $session): Response
     {
         try
         {

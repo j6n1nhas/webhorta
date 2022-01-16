@@ -32,7 +32,9 @@ class UserController extends AbstractController
             $user_id = $this->getUser()->getId();
             $utilizador = $this->getUser();
             $form = $this->createForm(SignupForm::class, $utilizador);
-            $carrinhos = $em->getRepository(Carrinho::class)->findBy(['user' => $user_id]);
+            $carrinhos = $em->createQuery('SELECT c FROM App\Entity\Carrinho c WHERE c.user = ?1 ORDER BY c.data_compra DESC');
+            $carrinhos->setParameter(1, $user_id);
+            $carrinhos = $carrinhos->getResult();
             /*
             if($request->isMethod('POST'))
             {
