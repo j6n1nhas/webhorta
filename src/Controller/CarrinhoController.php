@@ -6,15 +6,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;
 
 use App\Entity\User;
 use App\Entity\Produto;
 use App\Entity\Carrinho;
 use App\Entity\CarrinhoProduto;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
+
 use Exception;
 
 class CarrinhoController extends AbstractController
@@ -27,7 +27,6 @@ class CarrinhoController extends AbstractController
         if($session->has('carrinho'))
         {
             $carrinho = $session->get('carrinho');
-            //dd($carrinho);
             return $this->render('carrinho.html', ['carrinho' => $carrinho]);
         }
         // Se não houver carrinho criado em sessão, crio uma mensagem para o utilizador que será renderizada através do ficheiro messages.html
@@ -45,9 +44,9 @@ class CarrinhoController extends AbstractController
         {
             $p = $em->getRepository(Produto::class)->find($id);
             if(!$p)
-                throw new Exception('Produto não existe');
+                throw new EntityNotFoundException('Produto não existe');
         }
-        catch(Exception $e)
+        catch(EntityNotFoundException $e)
         {
             $this->addFlash('danger', $e->getMessage());
             return $this->redirectToRoute('produtos');
@@ -68,7 +67,6 @@ class CarrinhoController extends AbstractController
             );
             // Crio o carrinho na sessão
             $session->set('carrinho', $carrinho);
-            //dd($session);
             // Crio uma mensagem de sucesso para o utilizador que será renderizada através do ficheiro mesages.html
             $this->addFlash('success', "Adicionado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." ao seu carrinho");
             // Redireciono o utilizador para a página de produtos
@@ -123,9 +121,9 @@ class CarrinhoController extends AbstractController
         {
             $p = $em->getRepository(Produto::class)->find($id);
             if(!$p)
-                throw new Exception('Produto não existe');
+                throw new EntityNotFoundException('Produto não existe');
         }
-        catch(Exception $e)
+        catch(EntityNotFoundException $e)
         {
             $this->addFlash('danger', $e->getMessage());
             return $this->redirectToRoute('produtos');
@@ -172,6 +170,7 @@ class CarrinhoController extends AbstractController
         // Se o valor total do carrinho for diferente de zero, atualizo o carrinho na sessão
         else
             $session->set('carrinho', $carrinho);
+        $session->save();
         // Notifico o utilizador que foi diminuída a quantidade de produto no carrinho
         $this->addFlash("success", "Retirado 1 ".$p->getUnidade()->getNome()." de ".$p->getNome()." do carrinho");
         // Redireciono o utilizador para a página de produtos
@@ -235,7 +234,6 @@ class CarrinhoController extends AbstractController
     {
         try
         {
-            $carrinho = $session->get('carrinho');
             $session->remove('carrinho');
             $session->save();
             $this->addFlash('success', 'Eliminado carrinho');

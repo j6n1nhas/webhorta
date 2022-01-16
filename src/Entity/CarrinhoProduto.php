@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\CarrinhoProdutoRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +29,7 @@ class CarrinhoProduto
     private $carrinho;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Produto", inversedBy="produto_carrinho")
+     * @ORM\ManyToOne(targetEntity="Produto")
      * @ORM\JoinColumn(nullable=false)
      */
     private $produto;

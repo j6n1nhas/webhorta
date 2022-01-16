@@ -34,6 +34,7 @@ class SignupForm extends AbstractType
                     new Regex('/\d{4}-\d{3}/'),
                 ],
             ])
+            ->add('localidade', TextType::class, ['required' => false])
             ->add('password', PasswordType::class, ['constraints' => [new Length(min: 6)],])
             ->add('password2', PasswordType::class, [
                 'mapped' => false,
@@ -61,6 +62,8 @@ class SignupForm extends AbstractType
             $form->remove('morada');
         if(!(isset($user['cod_postal'])))
             $form->remove('cod_postal');
+        if(!(isset($user['localidade'])))
+            $form->remove('localidade');
         if(!(isset($user['password'])))
             $form->remove('password');
         if(!(isset($user['password2'])))

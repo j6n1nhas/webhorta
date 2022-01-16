@@ -52,21 +52,6 @@ class Produto
      */
     private $unidade;
 
-    /**
-     * @ORM\OneToMany(targetEntity="CarrinhoProduto", mappedBy="produto")
-     */
-    private $produto_carrinho;
-
-    public function __construct()
-    {
-        $this->produto_carrinho = new ArrayCollection();
-    }
-
-    public function getProdutoCarrinho(): Collection
-    {
-        return $this->produto_carrinho;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 # Para a validação de campos
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -16,6 +17,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Regex;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -64,14 +66,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $cod_postal;
 
     /**
-     * @ORM\OneToMany(targetEntity=Carrinho::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Carrinho", mappedBy="user")
      */
     private $carrinhos;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $ativo;
+    private $ativo = true;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
