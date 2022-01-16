@@ -216,7 +216,7 @@ class CarrinhoController extends AbstractController
                         //Calculo o valor da diferença
                         $diferenca_valor = round(($value['preco_unitario'] * $diferenca_qtd), PHP_ROUND_HALF_UP);
                         //E atualizo o valor total do carrinho diminuindo a diferença de valor
-                        $new_carrinho->setValorTotal($carrinho['valor_total'] - $diferenca_valor);
+                        $new_carrinho->setValorTotal(round($carrinho['valor_total'] - $diferenca_valor), PHP_ROUND_HALF_UP);
                         //Informo o utilizador de que a quantidade foi alterada no carrinho
                         $this->addFlash('warning', sprintf('Tinha %d %ss de %s no seu carrinho mas de momento só podemos entregar-lhe %d', $value['quantidade']+$diferenca_qtd, $produto->getUnidade()->getNome(), $produto->getNome(), $produto->getStock()));
                     }
@@ -238,6 +238,7 @@ class CarrinhoController extends AbstractController
             //Removo o carrinho da sessão e gravo-a
             $session->remove('carrinho');
             $session->save();
+            //Informo o utilizador e redireciono-o para a dashboard
             $this->addFlash('success', 'Encomenda realizada!');
             return $this->redirectToRoute('dashboard');
         }
@@ -255,8 +256,10 @@ class CarrinhoController extends AbstractController
     {
         try
         {
+            //Removo o carrinho da sessão e gravo-a
             $session->remove('carrinho');
             $session->save();
+            //Informo o utilizador que o carrinho foi eliminado e redireciono-o para produtos
             $this->addFlash('success', 'Eliminado carrinho');
             return $this->redirectToRoute('produtos');
         }

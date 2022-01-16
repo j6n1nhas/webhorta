@@ -13,115 +13,111 @@ XPTO | {{ app.user.getNomeProprio() }} {{ app.user.getNomeApelido() }}
 {% endblock %}
 
 {% block conteudo %}
-<h2 class="fs-2 text-center">Dashboard</h2>
-<section id="dashboard">
-    <div class="janela shadow">
-        <h3>Dados pessoais</h3>
-        <div id="dados" class="container">
-            {{ form_start(form, {'attr': {'novalidate': true, 'class': 'needs-validation'}}) }}
-            <div class="dados-item col-12">
-                {{ form_label(form.nome_proprio) }}
-                {{ form_widget(form.nome_proprio, {'attr': {'disabled': true}}) }}
-                <div class="invalid-feedback">
-                    Introduza um nome válido
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.nome_proprio) }}
-                </div>
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_nome_proprio">Alterar</button>
+<h2 class="fs-2 text-center m-4">Dashboard</h2>
+<section id="dashboard" class="container-fluid">
+    <div id="dados" class="container-md janela shadow p-3">
+        <h3 class="text-center m-3 fs-3">Dados pessoais</h3>
+        {{ form_start(form, {'attr': {'novalidate': true, 'class': 'needs-validation'}}) }}
+        <div class="dados-item col-12">
+            {{ form_label(form.nome_proprio) }}
+            {{ form_widget(form.nome_proprio, {'attr': {'disabled': true}}) }}
+            <div class="invalid-feedback">
+                Introduza um nome válido
             </div>
-            <div class="dados-item col-12">
-                {{ form_label(form.nome_apelido) }}
-                {{ form_widget(form.nome_apelido, {'attr': {'disabled': true}}) }}
-                <div class="invalid-feedback">
-                    Introduza um apelido válido
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.nome_apelido) }}
-                </div>
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_nome_apelido">Alterar</button>
+            <div class="form-error">
+                {{ form_errors(form.nome_proprio) }}
             </div>
-            <div class="dados-item col-12">
-                {{ form_label(form.email) }}
-                {{ form_widget(form.email, {'attr': {'disabled': true}}) }}
-                <div class="invalid-feedback">
-                    Introduza um endereço de e-mail válido
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.email) }}
-                </div>
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_email">Alterar</button>
-            </div>
-            <div class="dados-item col-12">
-                {{ form_label(form.morada) }}
-                {{ form_widget(form.morada, {'attr': {'disabled': true}}) }}
-                <div class="form-error">
-                    {{ form_errors(form.morada) }}
-                </div>
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_morada">Alterar</button>
-            </div>
-            <div class="dados-item col-12">
-                {{ form_label(form.cod_postal) }}
-                {{ form_widget(form.cod_postal, {'attr': {'disabled': true, 'pattern': "\\d{4}-\\d{3}", "maxlength": 8, 'size': 8}}) }}
-                <div class="invalid-feedback">
-                    Código postal no formato 0000-000
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.cod_postal) }}
-                </div>
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_cod_postal">Alterar</button>
-            </div>
-            <div class="dados-item col-12">
-                {{ form_label(form.localidade) }}
-                {{ form_widget(form.localidade, {'attr': {'disabled': true}}) }}
-                <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_localidade">Alterar</button>
-            </div>
-            <div class="dados-item col-12" hidden>
-                {{ form_label(form.password) }}
-                {{ form_widget(form.password, {'attr': {'hidden': true, 'disabled': true, 'minlength': 6}}) }}
-                <div class="invalid-feedback">
-                    Mínimo 6 carateres
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.password) }}
-                </div>
-            </div>
-            <div class="dados-item col-12" hidden>
-                {{ form_label(form.password2) }}
-                {{ form_widget(form.password2, {'attr': {'hidden': true, 'disabled': true, 'minlength': 6}}) }}
-                <div class="invalid-feedback">
-                    Tem de ser igual à password
-                </div>
-                <div class="form-error">
-                    {{ form_errors(form.password2) }}
-                </div>
-            </div>
-            <div class="dados-item col-12">
-                <button id="btn_password" type="button" data-bs-toggle="button" class="btn btn-outline-secondary">Alterar password</button>
-            </div>
-            <div class="dados-item col-12">
-                <input type="reset" id="btn_reset" value="Repôr" class="btn btn-outline-warning">
-                <input type="submit" id="btn_submit" value="Submeter" class="btn btn-outline-success" disabled>
-            </div>
-        {{ form_end(form) }}
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_nome_proprio">Alterar</button>
         </div>
-    </div>
-    <div class="janela shadow">
-        <h3>Compras efetuadas</h3>
-        <div id="carrinhos">
-            <div class="list-group">
-                {% for carrinho in carrinhos %}
-                    <a href="{{ path('show_sell', {id: carrinho.id}) }}" class="list-group-item" aria-current="true">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Compra refª {{ carrinho.id }}</h5>
-                            <small>{{ carrinho.getDataCompra|date("d/m/Y") }}</small>
-                        </div>
-                        <p class="mb-1">Valor total: {{ carrinho.getValorTotal|preco }}</p>
-                        <p class="mb-1">Estado: <span class="fw-bold estado-carrinho">{{ carrinho.estado }}</span></p>
-                        <small>Items: {{ carrinho.getCarrinhoProduto|length }}</small>
-                    </a>
-                {% endfor %}
+        <div class="dados-item col-12">
+            {{ form_label(form.nome_apelido) }}
+            {{ form_widget(form.nome_apelido, {'attr': {'disabled': true}}) }}
+            <div class="invalid-feedback">
+                Introduza um apelido válido
             </div>
+            <div class="form-error">
+                {{ form_errors(form.nome_apelido) }}
+            </div>
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_nome_apelido">Alterar</button>
+        </div>
+        <div class="dados-item col-12">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email, {'attr': {'disabled': true}}) }}
+            <div class="invalid-feedback">
+                Introduza um endereço de e-mail válido
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.email) }}
+            </div>
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_email">Alterar</button>
+        </div>
+        <div class="dados-item col-12">
+            {{ form_label(form.morada) }}
+            {{ form_widget(form.morada, {'attr': {'disabled': true}}) }}
+            <div class="form-error">
+                {{ form_errors(form.morada) }}
+            </div>
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_morada">Alterar</button>
+        </div>
+        <div class="dados-item col-12">
+            {{ form_label(form.cod_postal) }}
+            {{ form_widget(form.cod_postal, {'attr': {'disabled': true, 'pattern': "\\d{4}-\\d{3}", "maxlength": 8, 'size': 8}}) }}
+            <div class="invalid-feedback">
+                Código postal no formato 0000-000
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.cod_postal) }}
+            </div>
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_cod_postal">Alterar</button>
+        </div>
+        <div class="dados-item col-12">
+            {{ form_label(form.localidade) }}
+            {{ form_widget(form.localidade, {'attr': {'disabled': true}}) }}
+            <button type="button" data-bs-toggle="button" class="btn btn-sm btn-outline-secondary" id="btn_localidade">Alterar</button>
+        </div>
+        <div class="dados-item col-12" hidden>
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password, {'attr': {'hidden': true, 'disabled': true, 'minlength': 6}}) }}
+            <div class="invalid-feedback">
+                Mínimo 6 carateres
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.password) }}
+            </div>
+        </div>
+        <div class="dados-item col-12" hidden>
+            {{ form_label(form.password2) }}
+            {{ form_widget(form.password2, {'attr': {'hidden': true, 'disabled': true, 'minlength': 6}}) }}
+            <div class="invalid-feedback">
+                Tem de ser igual à password
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.password2) }}
+            </div>
+        </div>
+        <div class="dados-item col-12">
+            <button id="btn_password" type="button" data-bs-toggle="button" class="btn btn-outline-secondary">Alterar password</button>
+        </div>
+        <div class="dados-item col-12">
+            <input type="reset" id="btn_reset" value="Repôr" class="btn btn-outline-warning">
+            <input type="submit" id="btn_submit" value="Submeter" class="btn btn-outline-success" disabled>
+        </div>
+    {{ form_end(form) }}
+    </div>
+    <div id="carrinhos" class="janela shadow container-sm list-group p-3">
+        <h3 class="text-center m-3 fs-3">Compras efetuadas</h3>
+        <div class="list-group w-100 carrinhos-group p-3">
+            {% for carrinho in carrinhos %}
+                <a href="{{ path('show_sell', {id: carrinho.id}) }}" class="list-group-item" aria-current="true">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="mb-1">Compra refª {{ carrinho.id }}</h5>
+                        <small>{{ carrinho.getDataCompra|date("d/m/Y") }}</small>
+                    </div>
+                    <p class="mb-1">Valor total: {{ carrinho.getValorTotal|preco }}</p>
+                    <p class="mb-1">Estado: <span class="fw-bold estado-carrinho">{{ carrinho.estado }}</span></p>
+                    <small>Items: {{ carrinho.getCarrinhoProduto|length }}</small>
+                </a>
+            {% endfor %}
         </div>
     </div>
 </section>
