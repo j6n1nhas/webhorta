@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c7c3d3c6ed935694e86050216447ec11cee0a900',
+        'reference' => 'a96a7d47deef2f7527a56ba76dd0fc9c5f38ed5e',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c7c3d3c6ed935694e86050216447ec11cee0a900',
+            'reference' => 'a96a7d47deef2f7527a56ba76dd0fc9c5f38ed5e',
             'dev_requirement' => false,
         ),
         'api-platform/core' => array(
@@ -709,12 +709,12 @@
             'dev_requirement' => false,
         ),
         'symfony/notifier' => array(
-            'pretty_version' => 'v6.0.1',
-            'version' => '6.0.1.0',
+            'pretty_version' => 'v6.0.2',
+            'version' => '6.0.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/notifier',
             'aliases' => array(),
-            'reference' => '5d9faf3f25c8251087289608aaf88b81712ea52c',
+            'reference' => '5a6afab6f6b9f29f1dccb46dd7a41280cc9c1ecc',
             'dev_requirement' => false,
         ),
         'symfony/options-resolver' => array(

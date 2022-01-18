@@ -4,7 +4,6 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,12 +21,15 @@ use App\Form\ContactForm;
 
 use App\Controller\MailerController;
 
+use Symfony\Component\Mailer\MailerInterface;
+
 use App\Service\MailSender;
+use DateTime;
 
 class Controller extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(Request $request, Session $session): Response
+    public function index(): Response
     {
         return $this->render('index.html', ['url' => $_SERVER['REQUEST_URI']]);
     }
@@ -124,21 +126,30 @@ class Controller extends AbstractController
 
     //Função para renderizar a página de contacto (formulário de contacto)
     #[Route('/contact-us', name: 'contactus', methods: ['GET', 'POST'])]
-    public function contactus(Request $request)
+    public function contactus(Request $request, MailerInterface $mailerInterface)
     {
         $form = $this->createForm(ContactForm::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
             $dados = $form->getData();
-            $data_contacto = date_parse_from_format('Y/m/d', $dados['data_contacto']);
-            dd($dados);
-            //$meio = $dados['']
-            $mailer = new MailSender($dados);
-            dd($data_contacto);
-            $mailer->setDataEnvio($dados['data_contacto']);
-            $this->addFlash('success', "Formulário válido");
-            //return $this->redirectToRoute('sendemail');
+            $data_contacto = new DateTime(date_format($dados['data_contacto'],'d-m-Y'));
+            $contactos = array();
+            if(isset($dados['telefone']) && !empty($dados['telefone']))
+                $contactos['telefone'] = $dados['telefone'];
+            if(isset($dados['email']) && !empty($dados['email']))
+                $contactos['email'] = $dados['email'];
+            $mailer = new MailSender(
+                $dados['nome_proprio'],
+                $dados['nome_apelido'],
+                $contactos,
+                $dados['mensagem'],
+                $data_contacto,
+            );
+            $mailer->criarEmail($mailerInterface);
+            $this->addFlash('success', "Obrigado pelo seu contacto, merecerá toda a nossa atenção");
+            $referer = $request->server->get('HTTP_REFERER');
+            return $this->redirect($referer);
         }
         return $this->renderForm('contactus.html', ['form' => $form]);
     }

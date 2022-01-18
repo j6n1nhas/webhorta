@@ -7,9 +7,17 @@
     <title>E-mail</title>
 </head>
 <body>
-    <h1>Horta XPTO</h1>
+    <header class="d-flex flex-row justify-content-between">
+        <img src="cid:logo" alt="Logotipo da empresa" width="75px" height="75px">
+        <h1>Horta XPTO</h1>
+    </header>
     <p>
-        Recebemos um contacto de {{ dados.nome_proprio }} {{ dados.nome_apelido }}
+        Recebemos um contacto de {{ nome }} que nos forneceu os seguintes contactos:
     </p>
+    {% for key, value in contactos %}
+        <p>{{ key }}: {{ value }}</p>
+    {% endfor %}
+    <p>E a seguinte mensagem:</p>
+    <p>{{ mensagem }}</p>
 </body>
 </html>

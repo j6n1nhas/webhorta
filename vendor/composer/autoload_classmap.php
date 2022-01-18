@@ -519,6 +519,7 @@ return array(
     'App\\Entity\\Unidade' => $baseDir . '/src/Entity/Unidade.php',
     'App\\Entity\\User' => $baseDir . '/src/Entity/User.php',
     'App\\EventSubscriber\\LocaleSubscriber' => $baseDir . '/src/EventSubscriber/LocaleSubscriber.php',
+    'App\\Form\\CarrinhoForm' => $baseDir . '/src/Form/CarrinhoForm.php',
     'App\\Form\\ContactForm' => $baseDir . '/src/Form/ContactForm.php',
     'App\\Form\\ProdutoForm' => $baseDir . '/src/Form/ProdutoForm.php',
     'App\\Form\\SignupForm' => $baseDir . '/src/Form/SignupForm.php',

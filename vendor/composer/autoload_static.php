@@ -1106,6 +1106,7 @@ class ComposerStaticInit2fe16df5d8074fb48a331abf4381da3b
         'App\\Entity\\Unidade' => __DIR__ . '/../..' . '/src/Entity/Unidade.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
         'App\\EventSubscriber\\LocaleSubscriber' => __DIR__ . '/../..' . '/src/EventSubscriber/LocaleSubscriber.php',
+        'App\\Form\\CarrinhoForm' => __DIR__ . '/../..' . '/src/Form/CarrinhoForm.php',
         'App\\Form\\ContactForm' => __DIR__ . '/../..' . '/src/Form/ContactForm.php',
         'App\\Form\\ProdutoForm' => __DIR__ . '/../..' . '/src/Form/ProdutoForm.php',
         'App\\Form\\SignupForm' => __DIR__ . '/../..' . '/src/Form/SignupForm.php',

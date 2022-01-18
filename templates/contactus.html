@@ -38,7 +38,7 @@ XPTO | Contacte-nos!
                 {{ form_errors(form.nome_apelido) }}
             </div>
         </div>
-        <div class="col-lg-6 col-sm-6 p-3">
+        <div class="col-lg-6 col-sm-6 p-3 flex-fill">
             {{ form_label(form.tipo_contacto) }}
             {{ form_widget(form.tipo_contacto) }}
             {{ form_help(form.tipo_contacto) }}
@@ -52,8 +52,9 @@ XPTO | Contacte-nos!
         <div class="col-sm-6 col-lg-6 p-3">
             {{ form_label(form.telefone) }}
             {{ form_widget(form.telefone) }}
+            {{ form_help(form.telefone) }}
             <div class="invalid-feedback">
-                Se escolheu o telefone, precisa fornecer o seu contacto
+                Se escolheu o telefone, precisa fornecer o seu contacto com 9 dígitos
             </div>
             <div class="form-error">
                 {{ form_errors(form.telefone) }}
@@ -69,7 +70,7 @@ XPTO | Contacte-nos!
                 {{ form_errors(form.email) }}
             </div>
         </div>
-        <div class="col-sm-6 col-lg-6 p-3">
+        <div class="col-sm-12 col-lg-6 p-3">
             {{ form_label(form.anexo) }}
             {{ form_widget(form.anexo) }}
             {{ form_help(form.anexo) }}
@@ -81,7 +82,7 @@ XPTO | Contacte-nos!
             </div>
         </div>
         {{ form_widget(form.data_contacto) }}
-        <div class="col-sm-6 col-lg-6 p-3">
+        <div class="col-sm-12 col-lg-6 p-3">
             {{ form_label(form.mensagem) }}
             {{ form_widget(form.mensagem) }}
             <div class="invalid-feedback">

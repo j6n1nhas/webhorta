@@ -47,12 +47,13 @@ class ContactForm extends AbstractType
             ->add('telefone', TelType::class, [
                 'required' => true,
                 'invalid_message' => 'O telefone é constituído por 9 dígitos',
+                'help' => 'Constituído por 9 dígitos começando com 2 ou 9',
                 'constraints' => [
                     new Length(exactly: 9),
                     new Regex('/((^91|^93|^92|^96)\d{7})|(^2\d{8})/'),
                 ],
                 'attr' => [
-                    'pattern' => '\d{9}',
+                    'pattern' => '((^91|^93|^92|^96)\\d{7})|(^2\\d{8})',
                     'maxLength' => 9,
                     'minLength' => 9,
                 ],
@@ -67,22 +68,13 @@ class ContactForm extends AbstractType
                 'help' => 'Ficheiros pdf ou docx',
                 'label' => 'Anexo(s)',
             ])
-            /*
-            ->add('data_contacto', HiddenType::class, [
-                'attr' => [
-                    'value' => date('Y/m/d'),
-                ],
-            ])
-            */
             ->add('data_contacto', DateType::class, [
-                'input' => 'datetime_immutable',
                 'widget' => 'single_text',
                 'attr' => [
                     'hidden' => true,
                     'value' => $options['allowed_data_contacto'],
                 ],
             ])
-            #->add('utilizador', EntityType::class, ['class' => User::class, 'required' => false])
             ->add('mensagem', TextareaType::class, [
                 'attr' => [
                     'cols' => 40,
