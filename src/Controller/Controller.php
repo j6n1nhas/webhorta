@@ -128,26 +128,34 @@ class Controller extends AbstractController
     #[Route('/contact-us', name: 'contactus', methods: ['GET', 'POST'])]
     public function contactus(Request $request, MailerInterface $mailerInterface)
     {
+        //Crio o formulário a partir da classe
         $form = $this->createForm(ContactForm::class);
+        //Recebo o request feito sobre o formulário
         $form->handleRequest($request);
+        //Se o formulário for submetido e válido
         if($form->isSubmitted() && $form->isValid())
         {
+            //Obtenho os dados dele
             $dados = $form->getData();
+            //Crio um objeto de data com a data que o formulário tem escondida
             $data_contacto = new DateTime(date_format($dados['data_contacto'],'d-m-Y'));
+            //Crio um array para receber o/os contactos que o utilizador deixou
             $contactos = array();
             if(isset($dados['telefone']) && !empty($dados['telefone']))
                 $contactos['telefone'] = $dados['telefone'];
             if(isset($dados['email']) && !empty($dados['email']))
                 $contactos['email'] = $dados['email'];
+            //Crio um objeto da minha classe que cria/envia e-mails
             $mailer = new MailSender(
                 $dados['nome_proprio'],
                 $dados['nome_apelido'],
                 $contactos,
                 $dados['mensagem'],
                 $data_contacto,
+                array_key_exists('email', $contactos) ? $contactos['email'] : null,
             );
             $mailer->criarEmail($mailerInterface);
-            $this->addFlash('success', "Obrigado pelo seu contacto, merecerá toda a nossa atenção");
+            $this->addFlash('success', "Obrigado pelo seu contacto, merecerá toda a nossa atenção e reponderemos com a máxima brevidade");
             $referer = $request->server->get('HTTP_REFERER');
             return $this->redirect($referer);
         }

@@ -40,7 +40,7 @@ class MailSender
     public function criarEmail(MailerInterface $mailer)
     {
         $template = new TemplatedEmail();
-        $template->from(new Address($this->endereco_destinatario, $this->nome_remetente));
+        $template->from(new Address($this->endereco_remetente, $this->nome_remetente));
         $template->to(new Address($this->endereco_destinatario, $this->nome_destinatario));
         $template->subject(sprintf("Novo contacto de %s no site HortaBio XPTO", $this->nome_remetente));
         $template->htmlTemplate('email.html');
@@ -59,16 +59,21 @@ class MailSender
         array $contactos,
         string $mensagem,
         DateTime $data_contacto,
+        string $endereco_remetente = null,
         string $nome_destinatario = 'Administrador',
         string $endereco_destinatario = 'jp_ramos_jr@sapo.pt',
         File $anexo = null,
         )
     {
+        //Defino o nome e endereço do destinatário
         $this->nome_destinatario = $nome_destinatario;
         $this->endereco_destinatario = $endereco_destinatario;
+        //Defino o nome do remetente unido o nome próprio ao apelido
         $nome_remetente = implode(' ', [$nome_proprio, $nome_apelido]);
         $this->nome_remetente = $nome_remetente;
+        //Defino a mensagem
         $this->mensagem = $mensagem;
+        $endereco_remetente ? $this->endereco_remetente = $endereco_remetente : $this->endereco_remetente = $endereco_destinatario;
         $this->anexos = $anexo;
         $this->data_contacto = $data_contacto;
         $this->contactos = $contactos;
