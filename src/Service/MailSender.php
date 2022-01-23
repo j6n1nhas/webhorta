@@ -48,6 +48,7 @@ class MailSender
             'nome' => $this->nome_remetente,
             'contactos' => $this->contactos,
             'mensagem' => $this->mensagem,
+            'data' => $this->data_contacto,
         ]);
         $template->embedFromPath('images/ic_launcher_foreground.png', 'logo');
         $mailer->send($template);

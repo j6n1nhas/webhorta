@@ -11,7 +11,7 @@
         <h1>Horta XPTO</h1>
     </div>
     <p>
-        Recebemos um contacto de {{ nome }} que nos forneceu os seguintes contactos:
+        No dia {{ data }}, recebemos um contacto de {{ nome }} que nos forneceu os seguintes contactos:
     </p>
     {% for key, value in contactos %}
         <p>{{ key|capitalize }}: {{ value }}</p>
