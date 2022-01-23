@@ -1,1 +1,1 @@
-web: symfony serve
+web: symfony serve public/
