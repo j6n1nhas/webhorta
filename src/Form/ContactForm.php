@@ -63,10 +63,10 @@ class ContactForm extends AbstractType
                 ])
             ->add('anexo', FileType::class, [
                 'required' => false,
-                'multiple' => true,
+                'multiple' => false,
                 'invalid_message' => 'Só são permitidos ficheiros do tipo PDF ou DOCX',
-                'help' => 'Ficheiros pdf ou docx',
-                'label' => 'Anexo(s)',
+                'help' => 'Ficheiro pdf ou docx',
+                'label' => 'Anexo',
             ])
             ->add('data_contacto', DateType::class, [
                 'widget' => 'single_text',

@@ -128,8 +128,17 @@ class Controller extends AbstractController
     #[Route('/contact-us', name: 'contactus', methods: ['GET', 'POST'])]
     public function contactus(Request $request, MailerInterface $mailerInterface)
     {
+        $referer = $request->server->get('HTTP_REFERER');
         //Crio o formulário a partir da classe
         $form = $this->createForm(ContactForm::class);
+        if($this->getUser())
+        {
+            $form->setData([
+                'nome_proprio' => $this->getUser()->getNomeProprio(),
+                'nome_apelido' => $this->getUser()->getNomeApelido(),
+                'email' => $this->getUser()->getEmail(),
+            ]);
+        }
         //Recebo o request feito sobre o formulário
         $form->handleRequest($request);
         //Se o formulário for submetido e válido
@@ -153,10 +162,10 @@ class Controller extends AbstractController
                 $dados['mensagem'],
                 $data_contacto,
                 array_key_exists('email', $contactos) ? $contactos['email'] : null,
+                anexo: isset($dados['anexo']) ? $dados['anexo'] : null,
             );
             $mailer->criarEmail($mailerInterface);
             $this->addFlash('success', "Obrigado pelo seu contacto, merecerá toda a nossa atenção e reponderemos com a máxima brevidade");
-            $referer = $request->server->get('HTTP_REFERER');
             return $this->redirect($referer);
         }
         return $this->renderForm('contactus.html', ['form' => $form]);

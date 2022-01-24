@@ -2,12 +2,9 @@
 namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\RawMessage;
-use Symfony\Component\Mailer\Envelope;
 use DateTime;
 use Symfony\Component\Mime\Address;
 
@@ -32,7 +29,7 @@ class MailSender
     private string $mensagem;
 
     //Eventuais anexos que o utilizador tenha incluído
-    private $anexos;
+    private $anexo;
 
     //Data do contacto
     private DateTime $data_contacto;
@@ -48,9 +45,11 @@ class MailSender
             'nome' => $this->nome_remetente,
             'contactos' => $this->contactos,
             'mensagem' => $this->mensagem,
-            'data' => $this->data_contacto,
+            'data' => $this->getDataContacto(),
         ]);
         $template->embedFromPath('images/ic_launcher_foreground.png', 'logo');
+        if($this->anexos)
+            $template->attachFromPath($this->anexo, 'anexo'.'.'.$this->anexos->guessClientExtension());
         $mailer->send($template);
     }
 
@@ -63,7 +62,7 @@ class MailSender
         string $endereco_remetente = null,
         string $nome_destinatario = 'Administrador',
         string $endereco_destinatario = 'jp_ramos_jr@sapo.pt',
-        File $anexo = null,
+        UploadedFile $anexo = null,
         )
     {
         //Defino o nome e endereço do destinatário
@@ -75,7 +74,7 @@ class MailSender
         //Defino a mensagem
         $this->mensagem = $mensagem;
         $endereco_remetente ? $this->endereco_remetente = $endereco_remetente : $this->endereco_remetente = $endereco_destinatario;
-        $this->anexos = $anexo;
+        $this->anexo = $anexo;
         $this->data_contacto = $data_contacto;
         $this->contactos = $contactos;
     }
@@ -152,8 +151,8 @@ class MailSender
         return $this;
     }
 
-    public function getDataContacto(): DateTime
+    public function getDataContacto(): string
     {
-        return $this->data_contacto;
+        return date_format($this->data_contacto, 'd/m/Y');
     }
 }
