@@ -48,8 +48,8 @@ class MailSender
             'data' => $this->getDataContacto(),
         ]);
         $template->embedFromPath('images/ic_launcher_foreground.png', 'logo');
-        if($this->anexos)
-            $template->attachFromPath($this->anexo, 'anexo'.'.'.$this->anexos->guessClientExtension());
+        if($this->anexo)
+            $template->attachFromPath($this->anexo, 'anexo'.'.'.$this->anexo->guessClientExtension());
         $mailer->send($template);
     }
 

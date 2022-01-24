@@ -1,0 +1,45 @@
+<?php //App_Entity_Produto
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Symfony\\Component\\Serializer\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\ClassMetadata')),
+        clone ($p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata')),
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+        clone $p['Symfony\\Component\\Serializer\\Mapping\\AttributeMetadata'],
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'App\\Entity\\Produto',
+                'id',
+                'nome',
+                'descricao',
+                'preco_unitario',
+                'stock',
+                'foto',
+                'unidade',
+                'precoUnitario',
+            ],
+            'attributesMetadata' => [
+                [
+                    'id' => $o[1],
+                    'nome' => $o[2],
+                    'descricao' => $o[3],
+                    'preco_unitario' => $o[4],
+                    'stock' => $o[5],
+                    'foto' => $o[6],
+                    'unidade' => $o[7],
+                    'precoUnitario' => $o[8],
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];

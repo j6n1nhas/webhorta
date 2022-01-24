@@ -1,0 +1,80 @@
+<?php //c50501c7a68afba201f91a70e20f3768
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Query\\ParserResult'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ParserResult')),
+        clone ($p['Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\Exec\\SingleSelectExecutor')),
+        clone ($p['Doctrine\\ORM\\Query\\ResultSetMapping'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Query\\ResultSetMapping')),
+    ],
+    null,
+    [
+        'Doctrine\\ORM\\Query\\ParserResult' => [
+            '_sqlExecutor' => [
+                $o[1],
+            ],
+            '_resultSetMapping' => [
+                $o[2],
+            ],
+        ],
+        'Doctrine\\ORM\\Query\\Exec\\AbstractSqlExecutor' => [
+            '_sqlStatements' => [
+                1 => 'SELECT p0_.id AS id_0, p0_.nome AS nome_1, p0_.descricao AS descricao_2, p0_.preco_unitario AS preco_unitario_3, p0_.stock AS stock_4, p0_.foto AS foto_5, p0_.unidade_id AS unidade_id_6 FROM produto p0_ WHERE p0_.stock > 0',
+            ],
+        ],
+        'stdClass' => [
+            'aliasMap' => [
+                2 => [
+                    'p' => 'App\\Entity\\Produto',
+                ],
+            ],
+            'fieldMappings' => [
+                2 => [
+                    'id_0' => 'id',
+                    'nome_1' => 'nome',
+                    'descricao_2' => 'descricao',
+                    'preco_unitario_3' => 'preco_unitario',
+                    'stock_4' => 'stock',
+                    'foto_5' => 'foto',
+                ],
+            ],
+            'typeMappings' => [
+                2 => [
+                    'unidade_id_6' => 'integer',
+                ],
+            ],
+            'entityMappings' => [
+                2 => [
+                    'p' => null,
+                ],
+            ],
+            'metaMappings' => [
+                2 => [
+                    'unidade_id_6' => 'unidade_id',
+                ],
+            ],
+            'columnOwnerMap' => [
+                2 => [
+                    'id_0' => 'p',
+                    'nome_1' => 'p',
+                    'descricao_2' => 'p',
+                    'preco_unitario_3' => 'p',
+                    'stock_4' => 'p',
+                    'foto_5' => 'p',
+                    'unidade_id_6' => 'p',
+                ],
+            ],
+            'declaringClasses' => [
+                2 => [
+                    'id_0' => 'App\\Entity\\Produto',
+                    'nome_1' => 'App\\Entity\\Produto',
+                    'descricao_2' => 'App\\Entity\\Produto',
+                    'preco_unitario_3' => 'App\\Entity\\Produto',
+                    'stock_4' => 'App\\Entity\\Produto',
+                    'foto_5' => 'App\\Entity\\Produto',
+                ],
+            ],
+        ],
+    ],
+    $o[0],
+    []
+); }];
