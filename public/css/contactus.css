@@ -1,6 +1,6 @@
 main {
     width: 80%;
-    margin: 10%;
+    margin: 0 10%;
 }
 
 #formulario {
@@ -14,12 +14,12 @@ main {
 @media (orientation: landscape) and (min-width: 400px) {
     #formulario {
         width: 80%;
-        margin: 10%;
+        margin: 0 10%;
     }
 
     main {
         width: 80%;
-        margin: 10%;
+        margin: 5% 10%;
     }
 }
 
@@ -30,6 +30,6 @@ main {
 
     main {
         width: 90%;
-        margin: 5%;
+        margin: 5% 5%;
     }
 }

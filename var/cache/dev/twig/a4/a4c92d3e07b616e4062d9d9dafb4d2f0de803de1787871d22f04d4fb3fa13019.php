@@ -44,13 +44,13 @@ class __TwigTemplate_fb499b05353eecead4a855cccd7a21559cba77530bbc2f038b2f557df32
   <h1 class=\"text-center m-4\">AGRICULTURA BIOLÓGICA XPTO</h1>
   ";
         // line 3
-        if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, ($context["app"] ?? null), "session", [], "any", false, true, false, 3), "carrinho", [], "any", true, true, false, 3)) {
+        if (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 3, $this->source); })()), "session", [], "any", false, false, false, 3), "has", [0 => "carrinho"], "method", false, false, false, 3)) {
             // line 4
             echo "    <a href=\"";
             echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("carrinho");
             echo "\"><img src=\"";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("media/shopping-cart-filled.png"), "html", null, true);
-            echo "\" style=\"width: 50px; height: 50px;\" alt=\"Carrinho de compras cheio\"></a>
+            echo "\" style=\"margin-top: 20px; width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;\" alt=\"Carrinho de compras cheio\"></a>
   ";
         } else {
             // line 6
@@ -214,8 +214,8 @@ class __TwigTemplate_fb499b05353eecead4a855cccd7a21559cba77530bbc2f038b2f557df32
     {
         return new Source("<div id=\"header\" class=\"justify-content-around\" style=\"display: flex; flex-flow: row nowrap;\">
   <h1 class=\"text-center m-4\">AGRICULTURA BIOLÓGICA XPTO</h1>
-  {% if app.session.carrinho is defined %}
-    <a href=\"{{ path('carrinho') }}\"><img src=\"{{ asset('media/shopping-cart-filled.png') }}\" style=\"width: 50px; height: 50px;\" alt=\"Carrinho de compras cheio\"></a>
+  {% if app.session.has('carrinho') %}
+    <a href=\"{{ path('carrinho') }}\"><img src=\"{{ asset('media/shopping-cart-filled.png') }}\" style=\"margin-top: 20px; width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;\" alt=\"Carrinho de compras cheio\"></a>
   {% else %}
     <img src=\"{{ asset('media/shopping-cart-empty.png') }}\" style=\"width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;\" alt=\"Carrinho de compras vazio\">
   {% endif %}

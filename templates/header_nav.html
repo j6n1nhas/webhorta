@@ -1,7 +1,7 @@
 <div id="header" class="justify-content-around" style="display: flex; flex-flow: row nowrap;">
   <h1 class="text-center m-4">AGRICULTURA BIOLÓGICA XPTO</h1>
-  {% if app.session.carrinho is defined %}
-    <a href="{{ path('carrinho') }}"><img src="{{ asset('media/shopping-cart-filled.png') }}" style="width: 50px; height: 50px;" alt="Carrinho de compras cheio"></a>
+  {% if app.session.has('carrinho') %}
+    <a href="{{ path('carrinho') }}"><img src="{{ asset('media/shopping-cart-filled.png') }}" style="margin-top: 20px; width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;" alt="Carrinho de compras cheio"></a>
   {% else %}
     <img src="{{ asset('media/shopping-cart-empty.png') }}" style="width: 50px; height: 50px; align-self: center; justify-self: flex-end; float: right;" alt="Carrinho de compras vazio">
   {% endif %}

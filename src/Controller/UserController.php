@@ -18,53 +18,46 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class UserController extends AbstractController
 {
-    #[Route('/dashboard', name: 'dashboard', methods: 'GET')]
+    #[Route('/dashboard', name: 'dashboard', methods: ['GET', 'POST'])]
     public function dashboard(
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher,
     ): Response
     {
-        // TODO: FAZER A LÓGICA PARA A ALTERAÇÃO DE CAMPOS DO UTILIZADOR
         try
         {
+            //Negar o acesso a utilizadores não autenticados
             $this->denyAccessUnlessGranted('ROLE_USER');
+            //Obtenho o id do utilizador atual para filtrar os carrinhos dele
             $user_id = $this->getUser()->getId();
+            //Obtenho o utilizador atual
             $utilizador = $this->getUser();
-            $form = $this->createForm(SignupForm::class, $utilizador);
+            //Crio um formulário com o utilizador atual associado
+            $form = $this->createForm(SignupForm::class, $utilizador, ['registar' => false,]);
+            //Faço uma query para obter os carrinhos deste utilizador e atribuo à variável carrinhos
             $carrinhos = $em->createQuery('SELECT c FROM App\Entity\Carrinho c WHERE c.user = ?1 ORDER BY c.data_compra DESC');
             $carrinhos->setParameter(1, $user_id);
             $carrinhos = $carrinhos->getResult();
-            /*
-            if($request->isMethod('POST'))
-            {
-                foreach($form->getData() as $field => $data)
-                {
-                    dd($form);
-                    if($field->isDisabled() || $data === null)
-                        $form->remove($field);
-                    else
-                        $field->setData($data);
-                }
-                $form->submit($request->request->all(), false);
-                $em->flush();
-                $this->addFlash('success', 'Registo alterado com sucesso');
-                return $this->redirectToRoute('dashboard', ['user' => $utilizador->getNomeProprio()."-".$utilizador->getNomeApelido()]);
-            }
-            */
-            /*
+            //Submeto o formulário e verifico se é válido
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
+                //Descarrego os dados do formulário para o utilizador
                 $utilizador = $form->getData();
-                if($utilizador->getPassword() !== null)
-                    $utilizador->setPassword($passwordHasher->hashPassword($utilizador, $utilizador->getPassword()));
+                //Se a password tiver sido alterada, corro o algoritmo de hash
+                if(isset($form['password']) && !empty($form['password']))
+                    $utilizador->setPassword($passwordHasher->hashPassword($utilizador, $form['password']->getData()));
+                //Gravo as alterações na base de dados
                 $em->flush();
+                //Notifico o utilizador e redireciono-o para a dashboard
                 $this->addFlash('success', 'Registo atualizado com sucesso');
                 return $this->redirectToRoute('dashboard', ['user' => $utilizador->getNomeProprio()."-".$utilizador->getNomeApelido()]);
-            }*/
+            }
+            //Se o utilizador não existir, levanto uma exceção apropriada
             if(!$utilizador)
                 throw new UserNotFoundException('Utilizador não registado');
+            //Renderizo a página, com o formulário e as variáveis
             return $this->renderForm('dashboard.html', [
                 'utilizador' => $utilizador,
                 'form' => $form,
@@ -75,12 +68,7 @@ class UserController extends AbstractController
         {
             $this->addFlash('danger', $e->getMessage());
             return $this->redirectToRoute('produtos');
-        }/*
-        catch(Exception $e)
-        {
-            $this->addFlash('warning', $e->getMessage());
-            return $this->redirectToRoute('index');
-        }*/
+        }
     }
 
     #[Route('/dashboard/carrinho/{id}', name: 'show_sell', methods: 'GET')]

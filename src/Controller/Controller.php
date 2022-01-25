@@ -96,6 +96,7 @@ class Controller extends AbstractController
             // Encripto/hash a password
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $user->setRoles(['ROLE_USER']);
+            $user->setAtivo(true);
             // Gravo o utilizador na base de dados
             $em->persist($user);
             $em->flush();

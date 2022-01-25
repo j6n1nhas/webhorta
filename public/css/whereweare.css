@@ -27,7 +27,3 @@ table {
 #percurso>table>tbody>tr>td:nth-last-child(1), #percurso>table>tbody>tr>td:nth-last-child(2) {
     text-align: center;
 }
-
-.progress {
-    width: 100%;
-}

@@ -33,7 +33,7 @@ XPTO | Registo
                     {{ form_errors(form.nome_apelido) }}
                 </div>
             </div>
-            <div class="col-sm-3 col-lg-3 p-3">
+            <div class="col-sm-4 col-lg-3 p-3">
                 {{ form_label(form.cod_postal) }}
                 {{ form_widget(form.cod_postal, {'attr': {'pattern': "\\d{4}-\\d{3}", 'maxlength': 8, 'size': 8}}) }}
                 <div class="invalid-feedback">
@@ -47,7 +47,7 @@ XPTO | Registo
                 {{ form_label(form.localidade) }}
                 {{ form_widget(form.localidade) }}
             </div>
-            <div class="col-sm-9 col-lg-5 p-3">
+            <div class="col-sm-8 col-lg-5 p-3">
                 {{ form_label(form.email) }}
                 {{ form_widget(form.email) }}
                 {{ form_help(form.email) }}
@@ -87,7 +87,7 @@ XPTO | Registo
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-lg-6 p-3">
+            <div class="col-sm-6 col-lg-6 p-3">
                 <input type="submit" name="btn_submit" id="btn_submit" class="btn btn-outline-success p-2" value="Registar">
             </div>
         </div>

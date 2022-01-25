@@ -5,7 +5,7 @@ XPTO | ADMIN
 {% endblock %}
 
 {% block estilos %}
-<link rel="stylesheet" href="{{ asset('/css/admin_index.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin_index.css') }}">
 {% endblock %}
 
 {% block scripts %}
@@ -15,7 +15,7 @@ XPTO | ADMIN
 
 {% block conteudo %}
 <h2 class="fs-2 text-center mt-3">DASHBOARD ADMIN</h2>
-<div class="container-sm d-flex flex-row justify-content-between">
+<div class="container-sm d-flex flex-row justify-content-between" id="dashboard">
     <section class="container-sm shadow m-3 p-3" id="entidades">
         <h3 class="fs-3 text-center mt-3">Entidades</h3>
         <div class="accordion" id="accordion">
@@ -117,7 +117,7 @@ XPTO | ADMIN
 				<a href="{{ path('admin_carrinho_edit', {id: carrinho.id, estados: false}) }}" class="list-group-item list-group-item-action" aria-current="false">
 					<div class="d-flex w-100 justify-content-between">
 						<div>
-							<h5 class="mb-1">Carrinho nº{{ carrinho.id }}</h5>
+							<h5 class="mb-1">Carrinho nº {{ carrinho.id }}</h5>
 							<p class="mb-1">Utilizador: {{ carrinho.getUser.getNomeProprio }} {{ carrinho.getUser.getNomeApelido }}</p>
 							<small class="estado-carrinho">{{ carrinho.estado }}</small>		
 						</div>

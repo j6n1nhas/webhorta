@@ -42,8 +42,9 @@ class SignupForm extends AbstractType
                 'constraints' => [
                     new Length(min: 6),
                 ],
-            ])
-            ->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmitData']);
+            ]);
+            if($options['registar'] == false)
+                $builder->addEventListener(FormEvents::PRE_SUBMIT, [$this, 'onPreSubmitData']);
     }
 
     public function onPreSubmitData(FormEvent $event): void
@@ -52,29 +53,29 @@ class SignupForm extends AbstractType
         $form = $event->getForm();
         if(!$user)
             return;
-        if(!(isset($user['nome_proprio'])))
+        if(empty($user['nome_proprio']))
             $form->remove('nome_proprio');
-        if(!(isset($user['nome_apelido'])))
+        if(empty($user['nome_apelido']))
             $form->remove('nome_apelido');
-        if(!(isset($user['email'])))
+        if(empty($user['email']))
             $form->remove('email');
-        if(!(isset($user['morada'])))
+        if(empty($user['morada']))
             $form->remove('morada');
-        if(!(isset($user['cod_postal'])))
+        if(empty($user['cod_postal']))
             $form->remove('cod_postal');
-        if(!(isset($user['localidade'])))
+        if(empty($user['localidade']))
             $form->remove('localidade');
-        if(!(isset($user['password'])))
+        if(empty($user['password']))
+        {
             $form->remove('password');
-        if(!(isset($user['password2'])))
             $form->remove('password2');
-        $event->setData($user);
-        $form->setData($user);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => User::class]);
+        $resolver->setDefault('registar', true);
     }
 
     public function finishView(FormView $view, FormInterface $form, array $options)

@@ -16,7 +16,6 @@ XPTO | Onde estamos
 {# Carregamos o nosso ficheiro de Javascript #}
 {{ encore_entry_script_tags('app') }}
 {# Carregamos o ficheiro de Javascript da biblioteca LeafLet #}
-<script src="{{ asset('build/leaflet/leaflet.js') }}"></script>
 <script src="{{ asset('js/whereweare.js') }}"></script>
 {% endblock %}
 
@@ -28,9 +27,6 @@ XPTO | Onde estamos
 <section id="caminho" hidden>
     <h3>Caminho até nós</h3>
     <div id="percurso">
-        <div class="progress">
-            <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated m-2" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
         <table>
             <thead>
                 <tr>
