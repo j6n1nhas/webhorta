@@ -13,13 +13,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
 use App\Entity\Produto;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Form\SignupForm;
 use App\Form\ContactForm;
-
-use App\Controller\MailerController;
 
 use Symfony\Component\Mailer\MailerInterface;
 
